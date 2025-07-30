@@ -3,13 +3,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$is_upsells_enabled = \FKCart\Includes\Data::is_upsells_enabled();
-$is_rewards_enabled = \FKCart\Includes\Data::is_rewards_enabled();
-$is_coupon_enabled  = \FKCart\Includes\Data::is_coupon_enabled();
-$cart_settings      = \FKCart\Includes\Data::get_settings();
-$front              = \FKCart\Includes\Front::get_instance();
-$is_preview         = fkcart_is_preview();
-$coupon_enable      = wc_coupons_enabled() && ( $is_coupon_enabled || $is_preview );
+$is_upsells_enabled    = \FKCart\Includes\Data::is_upsells_enabled();
+$is_rewards_enabled    = \FKCart\Includes\Data::is_rewards_enabled();
+$is_coupon_enabled     = \FKCart\Includes\Data::is_coupon_enabled();
+$cart_settings         = \FKCart\Includes\Data::get_settings();
+$front                 = \FKCart\Includes\Front::get_instance();
+$special_addon_enabled = \FKCart\Includes\Data::is_special_addon_enabled();
+$is_preview            = fkcart_is_preview();
+$coupon_enable         = wc_coupons_enabled() && ( $is_coupon_enabled || $is_preview );
 
 $show_at_load = ! did_action( 'wc_ajax_get_refreshed_fragments' ) && wp_doing_ajax();
 
@@ -72,6 +73,8 @@ do_action( 'fkcart_before_modal_container', $front );
 					}
 				}
 				?>
+
+				<?php do_action( 'fkcart_before_body', $front ); ?>
                 <!-- END: Reward -->
 
                 <!-- Body -->
@@ -90,6 +93,7 @@ do_action( 'fkcart_before_modal_container', $front );
 					<?php $is_style3_upsell_enabled && fkcart_get_template_part( 'cart/upsell-style3' ) ?>
                     <!-- END: Upsell Style -->
                 </div>
+				<?php do_action( 'fkcart_after_body', $front ); ?>
             </div>
             <!-- Slider Footer -->
             <div class="fkcart-slider-footer <?php echo esc_attr( $slider_footer_class ) ?>">
@@ -120,18 +124,19 @@ do_action( 'fkcart_before_modal_container', $front );
 					<?php $is_style5_upsell_enabled && fkcart_get_template_part( 'cart/upsell-style2' ) ?>
                 </div>
 
-                <div id="fkcart-popup" class="fkcart-popup">
-                    <div class="fkcart-popup-content">
-                        <div class="fkcart-title-wrap">
-                            <h4></h4>
-                            <span class="fkcart-close">
-                            <?php fkcart_get_template_part( 'icon/close', '', [ 'width' => 20, 'height' => 20 ] ); ?>
-                        </span>
-                        </div>
+				<?php if ( $special_addon_enabled ) : ?>
+                    <div id="fkcart-popup" class="fkcart-popup">
+                        <div class="fkcart-popup-content">
+                            <div class="fkcart-title-wrap">
+								<span class="fkcart-close">
+									<?php fkcart_get_template_part( 'icon/close', '', [ 'width' => 20, 'height' => 20 ] ); ?>
+								</span>
+                            </div>
 
-                        <div class="fkcart-item-meta-content"></div>
+                            <div class="fkcart-item-meta-content"></div>
+                        </div>
                     </div>
-                </div>
+				<?php endif; ?>
             </div>
         </div>
 

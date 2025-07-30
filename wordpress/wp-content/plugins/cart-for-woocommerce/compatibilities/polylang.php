@@ -12,12 +12,14 @@ if ( ! class_exists( '\FKCart\Compatibilities\PolyLang' ) ) {
 		}
 
 		public function is_enable() {
-			return defined( 'POLYLANG_PRO' ) && defined( 'PLLWC_VERSION' );
+			return defined( 'PLLWC_VERSION' );
 		}
 
 		public function map_gift_products( $gifts ) {
-			$gifts['add']    = array_map( [ $this, 'polylang_map_product' ], $gifts['add'] );
-			$gifts['remove'] = array_map( [ $this, 'polylang_map_product' ], $gifts['remove'] );
+			if ( defined( 'POLYLANG_PRO' ) ) {
+				$gifts['add']    = array_map( [ $this, 'polylang_map_product' ], $gifts['add'] );
+				$gifts['remove'] = array_map( [ $this, 'polylang_map_product' ], $gifts['remove'] );
+			}
 
 			return $gifts;
 		}
@@ -32,7 +34,19 @@ if ( ! class_exists( '\FKCart\Compatibilities\PolyLang' ) ) {
 		}
 
 		public function map_defaults_upsells( $default_upsells ) {
+			if ( ! defined( 'POLYLANG_PRO' ) ) {
+				return $default_upsells;
+			}
+
 			return array_map( [ $this, 'polylang_map_product' ], $default_upsells );
+		}
+
+		/**
+		 * get current language from polylang plugin
+		 * @return bool|int|\PLL_Language|string|string[]
+		 */
+		public function get_language_code() {
+			return pll_current_language();
 		}
 	}
 

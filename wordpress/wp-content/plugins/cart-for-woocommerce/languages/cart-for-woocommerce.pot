@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: FunnelKit Cart for WooCommerce 1.8.1\n"
+"Project-Id-Version: FunnelKit Cart for WooCommerce 1.9.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cart-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-06T16:58:43+00:00\n"
+"POT-Creation-Date: 2025-07-10T13:20:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: cart-for-woocommerce\n"
@@ -128,92 +128,92 @@ msgstr ""
 msgid "Unable to update settings"
 msgstr ""
 
-#: admin/app-ajax.php:188
-#: admin/app-ajax.php:519
+#: admin/app-ajax.php:209
+#: admin/app-ajax.php:540
 msgid "fetched products"
 msgstr ""
 
-#: admin/app-ajax.php:282
+#: admin/app-ajax.php:303
 msgid "No Product Found"
 msgstr ""
 
-#: admin/app-ajax.php:292
+#: admin/app-ajax.php:313
 msgid "Products Loaded"
 msgstr ""
 
-#: admin/app-ajax.php:410
+#: admin/app-ajax.php:431
 msgid "On backorder"
 msgstr ""
 
-#: admin/app-ajax.php:413
+#: admin/app-ajax.php:434
 msgid "In stock"
 msgstr ""
 
-#: admin/app-ajax.php:416
+#: admin/app-ajax.php:437
 msgid "Out of stock"
 msgstr ""
 
-#: admin/app-ajax.php:584
+#: admin/app-ajax.php:605
 msgid "fetched coupons"
 msgstr ""
 
-#: admin/app-ajax.php:604
+#: admin/app-ajax.php:625
 msgid "Invalid data provided"
 msgstr ""
 
-#: admin/app-ajax.php:612
+#: admin/app-ajax.php:633
 msgid "Product data updated"
 msgstr ""
 
-#: admin/app-ajax.php:612
+#: admin/app-ajax.php:633
 msgid "Unable to update product data"
 msgstr ""
 
-#: admin/app-ajax.php:660
+#: admin/app-ajax.php:681
 msgid "Fetched checkout data"
 msgstr ""
 
-#: admin/app-ajax.php:660
+#: admin/app-ajax.php:681
 msgid "Unable to fetch checkout data"
 msgstr ""
 
-#: admin/app-ajax.php:726
+#: admin/app-ajax.php:747
 msgid "Undefined error"
 msgstr ""
 
-#: admin/app-ajax.php:745
+#: admin/app-ajax.php:766
 msgid "Plugin slug is missing"
 msgstr ""
 
-#: admin/app-ajax.php:751
+#: admin/app-ajax.php:772
 msgid "Unable to install plugin"
 msgstr ""
 
-#: admin/app-ajax.php:785
+#: admin/app-ajax.php:806
 msgid "Unable to connect to the filesystem. Please confirm your credentials."
 msgstr ""
 
-#: admin/app-ajax.php:809
+#: admin/app-ajax.php:830
 msgid "Plugin basename is missing"
 msgstr ""
 
-#: admin/app-ajax.php:817
+#: admin/app-ajax.php:838
 msgid "You don't have permission to activate plugin"
 msgstr ""
 
-#: admin/app-ajax.php:827
+#: admin/app-ajax.php:848
 msgid "Some error occurred while activating the plugin"
 msgstr ""
 
-#: admin/app-ajax.php:834
+#: admin/app-ajax.php:855
 msgid "Plugin activated"
 msgstr ""
 
-#: admin/app-ajax.php:857
+#: admin/app-ajax.php:878
 msgid "Contact doesn't exists with the id : "
 msgstr ""
 
-#: admin/app-ajax.php:869
+#: admin/app-ajax.php:890
 msgid "Preferences Updated"
 msgstr ""
 
@@ -252,73 +252,74 @@ msgstr ""
 msgid "\"%s\" is removed"
 msgstr ""
 
-#: includes/ajax.php:531
+#: includes/ajax.php:533
 msgid "Security check failed"
 msgstr ""
 
-#: includes/ajax.php:562
+#: includes/ajax.php:564
 msgid "Required data missing"
 msgstr ""
 
-#: includes/data.php:50
+#: includes/data.php:52
 msgid "Review Your Cart"
 msgstr ""
 
-#: includes/data.php:55
+#: includes/data.php:57
 msgid "Coupon Code"
 msgstr ""
 
-#: includes/data.php:56
+#: includes/data.php:58
 msgid "Got a discount code?"
 msgstr ""
 
-#: includes/data.php:57
+#: includes/data.php:59
 msgid "Apply"
 msgstr ""
 
-#: includes/data.php:61
+#: includes/data.php:63
 msgid "Save {{saving_percentage}}"
 msgstr ""
 
-#: includes/data.php:62
+#: includes/data.php:64
 #: templates/cart/order-summary.php:14
 msgid "Shipping & taxes may be re-calculated at checkout"
 msgstr ""
 
-#: includes/data.php:67
+#: includes/data.php:69
+#: admin/app/dist/main.js:1
 msgid "Continue Shopping"
 msgstr ""
 
-#: includes/data.php:69
+#: includes/data.php:71
 msgid "Your Cart is Empty"
 msgstr ""
 
-#: includes/data.php:70
+#: includes/data.php:72
 msgid "Fill your cart with amazing items"
 msgstr ""
 
-#: includes/data.php:71
+#: includes/data.php:73
 msgid "Shop Now"
 msgstr ""
 
-#: includes/data.php:77
+#: includes/data.php:79
 #: admin/app/dist/main.js:1
 msgid "Frequently Bought Together"
 msgstr ""
 
-#: includes/data.php:81
+#: includes/data.php:83
 msgid "Congrats! You have unlocked all the rewards."
 msgstr ""
 
-#: includes/data.php:132
+#: includes/data.php:136
 msgid "Shipping protection"
 msgstr ""
 
-#: includes/data.php:133
+#: includes/data.php:137
 msgid "Protect your order from damage or theft during shipping."
 msgstr ""
 
-#: includes/front.php:413
+#: includes/front.php:414
 msgid "Remove this item"
 msgstr ""
 
@@ -596,6 +597,10 @@ msgid "Hover"
 msgstr ""
 
 #: admin/app/dist/main.js:1
+msgid "No Color"
+msgstr ""
+
+#: admin/app/dist/main.js:1
 msgid "Reset"
 msgstr ""
 
@@ -637,6 +642,14 @@ msgstr ""
 
 #: admin/app/dist/main.js:1
 msgid "Strike Through Price"
+msgstr ""
+
+#: admin/app/dist/main.js:1
+msgid "Saving Text Color"
+msgstr ""
+
+#: admin/app/dist/main.js:1
+msgid "Coupon Text Color"
 msgstr ""
 
 #: admin/app/dist/main.js:1
@@ -716,11 +729,45 @@ msgid "Custom CSS"
 msgstr ""
 
 #: admin/app/dist/main.js:1
+msgid "Remove %s"
+msgstr ""
+
+#: admin/app/dist/main.js:1
+msgid "%1$s (%2$s of %3$s)"
+msgstr ""
+
+#: admin/app/dist/main.js:1
+msgid "Clear all"
+msgstr ""
+
+#: admin/app/dist/main.js:1
+msgid "Move backward for selected items"
+msgstr ""
+
+#: admin/app/dist/main.js:1
+msgid "%d result found, use up and down arrow keys to navigate."
+msgid_plural "%d results found, use up and down arrow keys to navigate."
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/app/dist/main.js:1
+msgid "No results."
+msgstr ""
+
+#: admin/app/dist/main.js:1
 msgid "Add Language"
 msgstr ""
 
 #: admin/app/dist/main.js:1
 msgid "Edit Language"
+msgstr ""
+
+#: admin/app/dist/main.js:1
+msgid "Language"
+msgstr ""
+
+#: admin/app/dist/main.js:1
+msgid "Select"
 msgstr ""
 
 #: admin/app/dist/main.js:1
@@ -776,6 +823,22 @@ msgid "Reward Completed Message"
 msgstr ""
 
 #: admin/app/dist/main.js:1
+msgid "Special Addon Product Heading"
+msgstr ""
+
+#: admin/app/dist/main.js:1
+msgid "Special Addon Product Description"
+msgstr ""
+
+#: admin/app/dist/main.js:1
+msgid "Reward Title"
+msgstr ""
+
+#: admin/app/dist/main.js:1
+msgid "Icon Title"
+msgstr ""
+
+#: admin/app/dist/main.js:1
 msgid "No Language Added"
 msgstr ""
 
@@ -789,32 +852,6 @@ msgstr ""
 
 #: admin/app/dist/main.js:1
 msgid "Delete"
-msgstr ""
-
-#: admin/app/dist/main.js:1
-msgid "Remove %s"
-msgstr ""
-
-#: admin/app/dist/main.js:1
-msgid "%1$s (%2$s of %3$s)"
-msgstr ""
-
-#: admin/app/dist/main.js:1
-msgid "Clear all"
-msgstr ""
-
-#: admin/app/dist/main.js:1
-msgid "Move backward for selected items"
-msgstr ""
-
-#: admin/app/dist/main.js:1
-msgid "%d result found, use up and down arrow keys to navigate."
-msgid_plural "%d results found, use up and down arrow keys to navigate."
-msgstr[0] ""
-msgstr[1] ""
-
-#: admin/app/dist/main.js:1
-msgid "No results."
 msgstr ""
 
 #: admin/app/dist/main.js:1
@@ -862,10 +899,6 @@ msgid "Type"
 msgstr ""
 
 #: admin/app/dist/main.js:1
-msgid "Select"
-msgstr ""
-
-#: admin/app/dist/main.js:1
 msgid "For Discount to work, Coupons need to be enabled on this store"
 msgstr ""
 
@@ -886,11 +919,7 @@ msgid "For the Free Shipping reward to work accurately, the default customer loc
 msgstr ""
 
 #: admin/app/dist/main.js:1
-msgid "Icon Title"
-msgstr ""
-
-#: admin/app/dist/main.js:1
-msgid "Type here..."
+msgid "Type here…"
 msgstr ""
 
 #: admin/app/dist/main.js:1
@@ -1270,7 +1299,7 @@ msgid "Use CSS Selector"
 msgstr ""
 
 #: admin/app/dist/main.js:1
-msgid "To trigger sliding cart on existing cart icon, inspect element to find the CSS Class & enter it here"
+msgid "To trigger sliding cart on existing cart icon, inspect element to find the CSS Class & enter it here with dot (For example .cart-icon)"
 msgstr ""
 
 #: admin/app/dist/main.js:1
@@ -1399,6 +1428,10 @@ msgstr ""
 
 #: admin/app/dist/main.js:1
 msgid "Reward 1"
+msgstr ""
+
+#: admin/app/dist/main.js:1
+msgid "Type here..."
 msgstr ""
 
 #: admin/app/dist/main.js:1
@@ -1666,11 +1699,11 @@ msgid "Highlight new arrivals to grab customer attention."
 msgstr ""
 
 #: admin/app/dist/main.js:1
-msgid "Rewards"
+msgid "You may have some unsaved changes."
 msgstr ""
 
 #: admin/app/dist/main.js:1
-msgid "Language"
+msgid "Rewards"
 msgstr ""
 
 #: admin/app/dist/main.js:1

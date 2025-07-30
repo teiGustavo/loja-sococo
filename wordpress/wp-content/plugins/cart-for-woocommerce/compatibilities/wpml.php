@@ -57,6 +57,14 @@ if ( ! class_exists( '\FKCart\Compatibilities\Wpml' ) ) {
 			}
 			\FKCart\Pro\Rewards::getInstance()->update_reward();
 		}
+
+		/**
+		 * Return current language code from WPML
+		 * @return string
+		 */
+		public function get_language_code() {
+			return defined( 'ICL_LANGUAGE_CODE' ) ? ICL_LANGUAGE_CODE : '';
+		}
 	}
 
 	Compatibility::register( new Wpml(), 'wpml' );

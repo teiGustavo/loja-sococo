@@ -107,6 +107,11 @@ class CampaignBuilder
         ];
     }
 
+    /**
+     * Returns client config for evergreen mode.
+     *
+     * @return array
+     */
     private function evergreenClientConfig()
     {
         $evergreenCompaign = new EvergreenCampaign( $this->campaign->get_id() );
@@ -115,6 +120,9 @@ class CampaignBuilder
             'isRegular'    => false,
             'restart_duration'=> $this->campaign->getRestartDuration(true),
             'duration'     => $this->campaign->durationInSeconds(),
+            'evergreenEndType' => $this->campaign->getEvergreenEndType(),
+            'evergreenEndTime' => $this->campaign->getEvergreenEndTime(),
+            'evergreenEndDay' => $this->campaign->getEvergreenEndDay(),
             'should_reset' => $evergreenCompaign->shouldResetTimer(),
             'reset_token'  => $evergreenCompaign->getInitiatedResetToken(),
             'restart'      => apply_filters( 'hurryt_evergreen_restart', $this->campaign->getRestart() ),
@@ -123,6 +131,7 @@ class CampaignBuilder
             'reload_reset' => $evergreenCompaign->reloadReset,
         ];
 
+        return $config;
     }
 
     /**

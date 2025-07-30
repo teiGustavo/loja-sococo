@@ -38,23 +38,25 @@ if ( ! is_null( WC()->session ) && ! is_null( WC()->cart ) && wc_tax_enabled() &
 do_action( 'fkcart_before_checkout_button', $front );
 ?>
     <div class="fkcart-checkout-wrap fkcart-panel">
-        <a href="<?php echo esc_url( $cart_link ); ?>" id="fkcart-checkout-button">
-            <div class="fkcart-checkout--icon <?php echo( ! $button_icon ? "fkcart-hide" : "" ); ?>">
-				<?php fkcart_get_template_part( 'icon/checkout' ); ?>
-            </div>
-            <div class="fkcart-checkout--text"><?php esc_attr_e( $cart_text ) ?></div>
-            <div class="fkcart-checkout--price <?php echo( ! $button_price ? "fkcart-hide" : "" ); ?>">
-				<?php
-				if ( fkcart_is_preview() ) {
-					$discount_enabled = ( 'true' === $settings['enable_coupon_box'] || true === $settings['enable_coupon_box'] );
-					echo wp_kses_post( '<div class="fkcart-checkout--price-discounted ' . ( ! $discount_enabled ? "fkcart-hide" : "" ) . '">' . $front->get_discounted_subtotal() . '</div>' );
-					echo wp_kses_post( '<div class="fkcart-checkout--price-normal ' . ( $discount_enabled ? "fkcart-hide" : "" ) . '">' . $front->get_subtotal() . '</div>' );
-				} else {
-					echo wp_kses_post( apply_filters( 'fkcart_checkout_button_total', $total_amount ) );
-				}
-				?>
-            </div>
-        </a>
+        <div class="fkcart-checkout-info">
+            <a href="<?php echo esc_url( $cart_link ); ?>" id="fkcart-checkout-button">
+                <div class="fkcart-checkout--icon <?php echo( ! $button_icon ? "fkcart-hide" : "" ); ?>">
+					<?php fkcart_get_template_part( 'icon/checkout' ); ?>
+                </div>
+                <div class="fkcart-checkout--text"><?php esc_attr_e( $cart_text ) ?></div>
+                <div class="fkcart-checkout--price <?php echo( ! $button_price ? "fkcart-hide" : "" ); ?>">
+					<?php
+					if ( fkcart_is_preview() ) {
+						$discount_enabled = ( 'true' === $settings['enable_coupon_box'] || true === $settings['enable_coupon_box'] );
+						echo wp_kses_post( '<div class="fkcart-checkout--price-discounted ' . ( ! $discount_enabled ? "fkcart-hide" : "" ) . '">' . $front->get_discounted_subtotal() . '</div>' );
+						echo wp_kses_post( '<div class="fkcart-checkout--price-normal ' . ( $discount_enabled ? "fkcart-hide" : "" ) . '">' . $front->get_subtotal() . '</div>' );
+					} else {
+						echo wp_kses_post( apply_filters( 'fkcart_checkout_button_total', $total_amount ) );
+					}
+					?>
+                </div>
+            </a>
+        </div>
         <a href="<?php echo esc_url( $shop_link ) ?>" class="fkcart-shopping-link <?php echo( ! $continue_link ? "fkcart-hide" : "" ); ?> <?php echo( $continue_link_behaviour === 'close_cart' ? 'fkcart-modal-close' : '' ); ?>"><?php echo esc_html( $settings['continue_shopping_text'] ); ?></a>
     </div>
 <?php

@@ -33,7 +33,10 @@ class Cart {
 		if ( ! $order instanceof \WC_Order ) {
 			return;
 		}
-		$order->add_meta_data( '_fkcart_addon_views', wp_json_encode( array_map( 'strval', (array) $this->get_addons_views() ) ) );
+		$addon_views = $this->get_addons_views();
+		if ( ! empty( $addon_views ) ) {
+			$order->add_meta_data( '_fkcart_addon_views', wp_json_encode( array_map( 'strval', (array) $addon_views ) ) );
+		}
 	}
 
 	/**
@@ -44,11 +47,8 @@ class Cart {
 	 * @return false|void
 	 */
 	public function insert_stats( $order_id ) {
-
-
 		try {
 			$order = wc_get_order( $order_id );
-
 			if ( ! $order instanceof \WC_Order || $this->is_order_renewal( $order ) ) {
 				return;
 			}
@@ -66,8 +66,6 @@ class Cart {
 			}
 
 			$this->insert_data( $order );
-
-
 		} catch ( \Exception|\Error $e ) {
 		}
 	}
@@ -123,13 +121,14 @@ class Cart {
 
 	public function insert_data( $order ) {
 		try {
-			$meta_keys   = [
+			$meta_keys = [
 				'_fkcart_upsell_views',
 				'_fkcart_free_gift_views',
 				'_fkcart_free_shipping_methods',
 				'_fkcart_discount_code_views',
 				'_fkcart_addon_views'
 			];
+
 			$meta_values = array_combine( $meta_keys, array_map( [ $order, 'get_meta' ], $meta_keys ) );
 
 			// Process free shipping
@@ -149,7 +148,7 @@ class Cart {
 				$discount_views = array_values( array_intersect( array_map( 'strtolower', $discount_views ), $coupons ) );
 			}
 
-			if ( empty( $meta_values['_fkcart_addon_views'] ) && empty( $meta_values['_fkcart_upsell_views'] ) && empty( $free_shipping_views ) && empty( $meta_values['_fkcart_free_gift_views'] ) && empty( $discount_views ) ) {
+			if ( ( empty( $meta_values['_fkcart_addon_views'] ) || '[]' === $meta_values['_fkcart_addon_views'] ) && empty( $meta_values['_fkcart_upsell_views'] ) && empty( $free_shipping_views ) && empty( $meta_values['_fkcart_free_gift_views'] ) && empty( $discount_views ) ) {
 				return;
 			}
 

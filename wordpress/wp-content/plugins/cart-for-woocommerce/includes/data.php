@@ -2,6 +2,8 @@
 
 namespace FKCart\Includes;
 
+use FKCart\Compatibilities\Compatibility;
+
 if ( ! class_exists( '\FKCart\Includes\Data' ) ) {
 	#[AllowDynamicProperties]
 	class Data {
@@ -45,7 +47,7 @@ if ( ! class_exists( '\FKCart\Includes\Data' ) ) {
 				'cart_style'            => 'side-cart',
 				'cart_icon_style'       => 'style1',
 				'hide_empty_cart'       => false,
-				'ajax_add_to_cart'      => false,
+				'ajax_add_to_cart'      => true,
 				'enable_auto_open_cart' => true,
 				'cart_heading'          => __( 'Review Your Cart', 'cart-for-woocommerce' ),
 				'default_font'          => '',
@@ -99,6 +101,8 @@ if ( ! class_exists( '\FKCart\Includes\Data' ) ) {
 				'css_primary_text_color'          => '#353030', // primary text color
 				'css_secondary_text_color'        => '#82838E', // secondary text color
 				'strike_through_price_color'      => '#E15334', // Strike through price text color
+				'saving_text_price_color'         => '#5BA238', // Saving Text color
+				'coupon_text_price_color'         => '#5BA238', // Coupon Text color
 				'css_upsell_bg_color'             => '#f9f9ff',
 				'css_animation_speed'             => 400,
 				'css_border_radius'               => 8,
@@ -125,7 +129,7 @@ if ( ! class_exists( '\FKCart\Includes\Data' ) ) {
 				'smart_buttons'                          => false,
 				'enable_strike_through_discounted_price' => false,
 
-				'enable_special_addon'         => true,
+				'enable_special_addon'         => false,
 				'preselect_special_addon'      => true,
 				'special_addon_selection_type' => 'toggle',
 				'special_addon_product'        => [],
@@ -380,6 +384,9 @@ if ( ! class_exists( '\FKCart\Includes\Data' ) ) {
 		public static function get_value( $key ) {
 			$settings = self::get_settings();
 			if ( isset( $settings[ $key ] ) ) {
+				if( 'special_addon_image_size' === $key && empty( $settings[ $key ] ) ) {
+					return 48; // Default size for special addon image
+				}
 				return maybe_unserialize( $settings[ $key ] );
 			}
 
@@ -395,16 +402,15 @@ if ( ! class_exists( '\FKCart\Includes\Data' ) ) {
 			$bg_color = self::get_value( 'css_bg_color' );
 			$bg_color = empty( $bg_color ) ? '#fff' : $bg_color;
 
-			$btn_bg_color = self::get_value( 'css_button_bg_color' );
-			$btn_bg_color = empty( $btn_bg_color ) ? '#0170b9' : $btn_bg_color;
-
 			$var_style = "
 		:root {
-			--fkcart-primary-bg-color: " . $btn_bg_color . ";
+			--fkcart-primary-bg-color: " . self::get_value( 'css_button_bg_color' ) . ";
 			--fkcart-primary-font-color: " . self::get_value( 'css_button_text_color' ) . ";
 			--fkcart-primary-text-color: " . self::get_value( 'css_primary_text_color' ) . ";
 			--fkcart-secondary-text-color: " . self::get_value( 'css_secondary_text_color' ) . ";
 			--fkcart-strike-through-price-text-color: " . self::get_value( 'strike_through_price_color' ) . ";
+			--fkcart-saving-text-price-color: " . self::get_value( 'saving_text_price_color' ) . ";
+			--fkcart-coupon-text-price-color: " . self::get_value( 'coupon_text_price_color' ) . ";
 			--fkcart-accent-color: " . self::get_value( 'css_accent_color' ) . ";
 			--fkcart-border-color: " . self::get_value( 'css_border_color' ) . ";
 			--fkcart-error-color: #B00C0C;
@@ -505,9 +511,7 @@ if ( ! class_exists( '\FKCart\Includes\Data' ) ) {
 				$languages = isset( $languages['translation-languages'] ) ? $languages['translation-languages'] : array();
 				if ( ! empty( $languages ) ) {
 					foreach ( $languages as $language ) {
-						if ( $default_language !== $language ) {
-							$language_options[ $language ] = $language;
-						}
+						$language_options[ $language ] = $language;
 					}
 				}
 
@@ -528,33 +532,6 @@ if ( ! class_exists( '\FKCart\Includes\Data' ) ) {
 			return $language_options;
 		}
 
-		public static function get_default_lanagage() {
-			/** WPML */
-			if ( function_exists( 'icl_get_languages' ) ) {
-				return icl_get_default_language();
-			}
-
-			/** Polylang */
-			if ( function_exists( 'pll_the_languages' ) ) {
-				return pll_default_language();
-			}
-
-			/** TranslatePress **/
-			if ( fkcart_is_translatepress_active() ) {
-				$language_settings = ! empty( get_option( 'trp_settings' ) ) ? get_option( 'trp_settings' ) : array();
-				if ( isset( $language_settings['default-language'] ) ) {
-					return $language_settings['default-language'];
-				}
-			}
-
-			/** Weglot */
-			if ( fkcart_is_weglot_active() ) {
-				return weglot_get_original_language();
-			}
-
-			return get_locale();
-		}
-
 		/**
 		 * Get translated value for front-end
 		 *
@@ -566,10 +543,8 @@ if ( ! class_exists( '\FKCart\Includes\Data' ) ) {
 			if ( ( is_admin() && ! wp_doing_ajax() ) || ! isset( $db_values['language'] ) || empty( self::get_language_options() ) ) {
 				return $db_values;
 			}
-			$languages     = self::get_language_code();
-			$language_data = [];
 
-
+			$languages = Compatibility::get_language_code();
 			foreach ( $languages as $current_lang ) {
 				if ( isset( $db_values['language'][ $current_lang ] ) ) {
 					$language_data = $db_values['language'][ $current_lang ];
@@ -590,6 +565,16 @@ if ( ! class_exists( '\FKCart\Includes\Data' ) ) {
 					$pos = end( $pos );
 					if ( isset( $db_values['reward'][ $pos - 1 ] ) ) {
 						$db_values['reward'][ $pos - 1 ]['title'] = $value;
+					}
+					continue;
+				}
+
+				$pos = strpos( $key, 'reward_icon_title_' );
+				if ( $pos !== false ) {
+					$pos = explode( '_', $key );
+					$pos = end( $pos );
+					if ( isset( $db_values['reward'][ $pos - 1 ] ) ) {
+						$db_values['reward'][ $pos - 1 ]['icon_title'] = $value;
 					}
 					continue;
 				}
@@ -649,11 +634,6 @@ if ( ! class_exists( '\FKCart\Includes\Data' ) ) {
 		 * @return array
 		 */
 		public static function get_language_code() {
-			/** We found weGlot automatically convert all pages automatically. but we need to return array with current language */
-			if ( function_exists( 'weglot_get_current_language' ) ) {
-				return [ weglot_get_current_language() ];
-			}
-
 			$local        = get_locale();
 			$current_lang = strtolower( $local );
 			$separator    = false !== strpos( $current_lang, '-' ) ? '-' : '_';
@@ -776,12 +756,7 @@ if ( ! class_exists( '\FKCart\Includes\Data' ) ) {
 		 * @return bool
 		 */
 		public static function is_divi_page() {
-			if ( filter_has_var( INPUT_GET, 'et_fb' ) ) {
-				return true;
-
-			}
-
-			return false;
+			return filter_has_var( INPUT_GET, 'et_fb' );
 		}
 
 		/**
@@ -789,11 +764,7 @@ if ( ! class_exists( '\FKCart\Includes\Data' ) ) {
 		 * @return bool
 		 */
 		public static function is_customizer() {
-			if ( filter_has_var( INPUT_GET, 'customize_changeset_uuid' ) ) {
-				return true;
-			}
-
-			return false;
+			return filter_has_var( INPUT_GET, 'customize_changeset_uuid' );
 		}
 
 		/**
@@ -802,11 +773,7 @@ if ( ! class_exists( '\FKCart\Includes\Data' ) ) {
 		 * @return bool
 		 */
 		public static function is_bricks_page() {
-			if ( filter_has_var( INPUT_GET, 'bricks' ) ) {
-				return true;
-			}
-
-			return false;
+			return filter_has_var( INPUT_GET, 'bricks' );
 		}
 
 		/**
@@ -832,44 +799,44 @@ if ( ! class_exists( '\FKCart\Includes\Data' ) ) {
 		 * @param $product \WC_Product_Variable;
 		 */
 		public static function get_first_variation( $product, $vars_id = 0 ) {
-			if ( $product instanceof \WC_Product_Variable ) {
-
-				$vars = $product->get_available_variations();
-
-				$product_attributes = $product->get_variation_attributes();
-
-				if ( count( $vars ) == 0 ) {
-					return [];
-				}
-				$available_variable = [];
-				foreach ( $vars as $v ) {
-					$vid = $v['variation_id'];
-					// If variation id pass in function then return matched vars
-					if ( $vars_id > 0 && $vid == $vars_id ) {
-						return $v;
-					}
-					if ( ( wc_string_to_bool( $v['is_in_stock'] ) && $v['is_purchasable'] ) ) {
-						$available_variable[ $vid ] = $v;
-					}
-				}
-				if ( empty( $available_variable ) ) {
-					return [];
-				}
-
-				if ( isset( $available_variable[ $vars_id ] ) ) {
-					return $available_variable[ $vars_id ];
-				}
-				$first_key = key( $available_variable );
-				//check any any case
-				$variation_attributes = $available_variable[ $first_key ]['attributes'];
-				if ( self::is_invalid_variation_attribute( $variation_attributes ) ) {
-					$available_variable[ $first_key ]['attributes'] = self::map_variation_attributes( wc_get_product( $first_key )->get_attributes(), $product_attributes );
-				}
-
-				return $available_variable[ $first_key ];
+			if ( ! $product instanceof \WC_Product_Variable ) {
+				return [];
 			}
 
-			return [];
+			$vars = $product->get_available_variations();
+			if ( 0 === count( $vars ) ) {
+				return [];
+			}
+
+			$available_variable = [];
+			foreach ( $vars as $v ) {
+				$vid = $v['variation_id'];
+				// If variation id pass in function then return matched vars
+				if ( $vars_id > 0 && $vid == $vars_id ) {
+					return $v;
+				}
+				if ( ( wc_string_to_bool( $v['is_in_stock'] ) && $v['is_purchasable'] ) ) {
+					$available_variable[ $vid ] = $v;
+				}
+			}
+			if ( empty( $available_variable ) ) {
+				return [];
+			}
+
+			if ( isset( $available_variable[ $vars_id ] ) ) {
+				return $available_variable[ $vars_id ];
+			}
+
+			$product_attributes = $product->get_variation_attributes();
+
+			$first_key = key( $available_variable );
+			//check any case
+			$variation_attributes = $available_variable[ $first_key ]['attributes'];
+			if ( self::is_invalid_variation_attribute( $variation_attributes ) ) {
+				$available_variable[ $first_key ]['attributes'] = self::map_variation_attributes( wc_get_product( $first_key )->get_attributes(), $product_attributes );
+			}
+
+			return $available_variable[ $first_key ];
 		}
 
 		public static function map_variation_attributes( $variation_attr, $product_attr ) {

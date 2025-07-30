@@ -2,9 +2,9 @@
 Contributors: jwthemeltd, litonice13, masteraddons
 Tags: elementor, elementor templates, elementor addons, widgets for elementor, elementor widgets
 Requires at least: 4.0
-Tested up to: 6.8.1
+Tested up to: 6.8.2
 Requires PHP: 7.0
-Stable tag: 2.0.7.6
+Stable tag: 2.0.8.8
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -326,6 +326,9 @@ We've two ways to give Supports for "Master Addons" Plugin - 1. [WordPress Suppo
 .org/support/plugin/master-addons) and 2. [Support Forum](https://wordpress.org/support/plugin/master-addons/). Since, this is a Free Plugin, Support reply may delay for answer
 but we're Dedicated on our [FB Page](https://www.facebook.com/masteraddons/) for chatting.
 
+= How can I report security bugs? =
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/wordpress/plugin/master-addons/vdp)
+
 
 We're adding new Features everyday. You'll get regular Updates also !
 
@@ -350,18 +353,57 @@ Paste on your Local Computer
 
 
 == Changelog ==
+= 2.0.8.7 (20-07-2025) =
+* Fixed: Progress bar's title alignment, percentages color & typography.
+* Fixed: Team Member fixed default icon issue.
+* Fixed: Blog Post 'Read More' button style option
+* Fixed: Tooltip content alignment
+* Fixed: Advanced Tab fixed vertical tabs height, width & add content alignment- top, center, bottom.
+
+= 2.0.8.6 (14-07-2025) =
+* Fixed: "Master Addons" typo fixed on Category Panel
+* Removed: Call to Action - Line Height, Default Uppercase, Font weight removed so it can grab Theme styles
+* Removed: "Button" Option for HTML Tag removed from Dual Heading
+
+= 2.0.8.5 (13-07-2025) =
+* Fix: Save template was not working issue.
+* Fix: Import template was not working.
+* Update: Elementor Cloud store template option applied.
+* Patch: Security patch added for xss script.
+
+= 2.0.8.4 (10-07-2025) =
+* Fix: blog component getting warning issue.
+* update: UI updated.
+
+= 2.0.8.3 (09-07-2025) =
+* Fix: Master accordion widget title alignment issue.
+* Update: Added tags separator option for blog posts widget.
+* Patch: Added Security patch for Stored XSS vulnerability.
+* Patch: Added Security patch for unauthorize style update issue.
+
+= 2.0.8.2 (30-06-2025) =
+* Update: Added security patch for css scripts.
+* Fix: Tooltip extension missing text issue fixed.
+
+= 2.0.8.1 (18-06-2025) =
+* Updated: Enhanced security validation.
+* Updated: Removed deprecated classes for Elementor.
+
+= 2.0.8 (13-06-2025) =
+* Fixed: Insufficient capability check in Custom JS module causing stored XSS vulnerability (CVE-2025-5284).
+* Updated: Enhanced security validation for Custom JS inputs to prevent Contributor+ level script injection.
+
 = 2.0.7.6 (26-05-2025) =
-* Fixed: Image hover effect has deprecated code. 
-* Fixed: Template importer has issue with image loading. 
-* Fixed: MA Timeline updated and fixed js error. 
-* Fixed: Textdomain loading too early issue. 
-* Fixed: Elementor editor not loading issue. 
-* Update: Security patch added. 
+* Fixed: Image hover effect has deprecated code.
+* Fixed: Template importer has issue with image loading.
+* Fixed: MA Timeline updated and fixed js error.
+* Fixed: Textdomain loading too early issue.
+* Fixed: Elementor editor not loading issue.
+* Update: Security patch added.
 * Update: Freemius SDK with better security.
 
 = 2.0.7.5 (19-04-2025) =
 * Fixed: WordPress 6.8 critical error issue fixed
-
 
 = 2.0.7.4 (10-03-2025) =
 * Fixed: Mega Menu - Data Saving, Editor Close button position updated
@@ -379,4 +421,3 @@ Paste on your Local Computer
 
 
 Details [Changelogs here](https://master-addons.com/changelogs/)
-

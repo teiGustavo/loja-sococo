@@ -30,12 +30,10 @@ if ( ! class_exists( '\FKCart\Compatibilities\WPML_Multicurrency' ) ) {
 		 * @return float
 		 */
 		public function alter_fixed_amount( $price, $currency = null ) {
-			if ( ! class_exists( '\SitePress' ) ) {
-				return $price;
-			}
+
 
 			global $woocommerce_wpml;
-			if ( WCML_MULTI_CURRENCIES_INDEPENDENT !== $woocommerce_wpml->settings['enable_multi_currency'] ) {
+			if ( defined( 'WCML_MULTI_CURRENCIES_INDEPENDENT' ) && WCML_MULTI_CURRENCIES_INDEPENDENT !== $woocommerce_wpml->settings['enable_multi_currency'] ) {
 				return $price;
 			}
 

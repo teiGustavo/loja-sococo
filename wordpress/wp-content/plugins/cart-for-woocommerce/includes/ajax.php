@@ -503,7 +503,9 @@ if ( ! class_exists( '\FKCart\Includes\Ajax' ) ) {
 				$fragments['.fkcart-modal-container'] = fkcart_get_active_skin_html();
 				$fragments['.fkcart-mini-toggler']    = fkcart_mini_cart_html();
 			}
-
+			$instance                  = \FKCart\Includes\Front::get_instance();
+			$fragments['fkcart_qty']   = $instance->get_cart_content_count();
+			$fragments['fkcart_total'] = urlencode( $instance->get_subtotal() );
 
 			$resp = [
 				'fragments'                => apply_filters( 'fkcart_fragments', $fragments ),

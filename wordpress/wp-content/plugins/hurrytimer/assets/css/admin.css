@@ -36423,20 +36423,24 @@
 .post-type-hurrytimer_countdown .form-table td select,
 .post-type-hurrytimer_countdown .form-table td input[type=text],
 .post-type-hurrytimer_countdown .form-table td input[type=number],
+.post-type-hurrytimer_countdown .form-table td input[type=time],
 .post-type-hurrytimer_countdown .form-table td textarea,
 .post-type-hurrytimer_countdown .hurrytimer-form-field select,
 .post-type-hurrytimer_countdown .hurrytimer-form-field input[type=text],
 .post-type-hurrytimer_countdown .hurrytimer-form-field input[type=number],
+.post-type-hurrytimer_countdown .hurrytimer-form-field input[type=time],
 .post-type-hurrytimer_countdown .hurrytimer-form-field textarea {
   border-radius: 3px;
 }
 .post-type-hurrytimer_countdown .form-table td select:focus,
 .post-type-hurrytimer_countdown .form-table td input[type=text]:focus,
 .post-type-hurrytimer_countdown .form-table td input[type=number]:focus,
+.post-type-hurrytimer_countdown .form-table td input[type=time]:focus,
 .post-type-hurrytimer_countdown .form-table td textarea:focus,
 .post-type-hurrytimer_countdown .hurrytimer-form-field select:focus,
 .post-type-hurrytimer_countdown .hurrytimer-form-field input[type=text]:focus,
 .post-type-hurrytimer_countdown .hurrytimer-form-field input[type=number]:focus,
+.post-type-hurrytimer_countdown .hurrytimer-form-field input[type=time]:focus,
 .post-type-hurrytimer_countdown .hurrytimer-form-field textarea:focus {
   border-width: 2px;
 }
@@ -36614,6 +36618,10 @@
   padding: 0 10px;
   color: #949494;
   text-transform: uppercase;
+}
+.post-type-hurrytimer_countdown .hurrytimer-field-duration,
+.post-type-hurrytimer_countdown .hurrytimer-field-time {
+  margin-top: 10px;
 }
 .post-type-hurrytimer_countdown #hurrytimer-actions .description {
   margin-left: 5px;

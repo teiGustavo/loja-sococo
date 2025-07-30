@@ -3,7 +3,6 @@
 namespace FKCart\Includes;
 
 use FKCart\Includes\Traits\Instance;
-use FKWCS\Gateway\Stripe\GooglePay;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -58,8 +57,10 @@ if ( ! class_exists( '\FKCart\Includes\Front' ) ) {
 			/**
 			 * Update set cookie after thank u page
 			 */
-			add_action( 'woocommerce_thankyou', [ $this, 'update_cookie_after_place_order' ], 99 );
+			add_action( 'wp', [ $this, 'unset_cookies' ], 99 );
+			add_action( 'woocommerce_thankyou', [ $this, 'unset_js_cookies' ], 99 );
 
+			add_action( 'wfocu_footer_before_print_scripts', [ $this, 'unset_js_cookies' ], 99 );
 
 			if ( false === Data::is_cart_enabled( 'all' ) ) {
 				return;
@@ -958,8 +959,6 @@ if ( ! class_exists( '\FKCart\Includes\Front' ) ) {
 		 */
 		public function display_strike_price( $price, $cart_item ) {
 			try {
-
-
 				$product            = $cart_item['data'];
 				$qty                = $cart_item['quantity'];
 				$regular_price      = $product->get_regular_price();
@@ -978,11 +977,21 @@ if ( ! class_exists( '\FKCart\Includes\Front' ) ) {
 					return $price;
 				}
 
-
 				// Do not support strike price for some product type in cart
 				if ( in_array( $product->get_type(), $other_product_type ) ) {
 					return $price;
 				}
+
+				/**
+				 * Check Order meta with Buy Once or Subscribe for WooCommerce Subscriptions by eCommerce Tools
+				 */
+				if ( defined( 'BOS_PLUGIN_PATH' ) ) {
+					$bos4w_plans = $product->get_meta( '_subscription_plan_data' );
+					if ( $bos4w_plans ) {
+						return $price;
+					}
+				}
+
 				if ( ( isset( $cart_item['wcsatt_data'] ) && ! empty( $cart_item['wcsatt_data']['active_subscription_scheme'] ) ) ) {
 					/** @var $product \WC_Product */
 					$regular = $regular_price * $qty;
@@ -991,7 +1000,6 @@ if ( ! class_exists( '\FKCart\Includes\Front' ) ) {
 						$price_html = wc_format_sale_price( $regular, $price );
 					} else {
 						$price_html = $price;
-
 					}
 				} else {
 					/** @var $product \WC_Product */
@@ -1008,7 +1016,6 @@ if ( ! class_exists( '\FKCart\Includes\Front' ) ) {
 						$price_html = wc_price( $price );
 					}
 				}
-
 
 				return $price_html;
 			} catch ( \Error|\Exception $error ) {
@@ -1064,13 +1071,37 @@ if ( ! class_exists( '\FKCart\Includes\Front' ) ) {
 			return $round_value;
 		}
 
+		/**
+		 * Unset cookies on order received page or offer page via PHP
+		 *
+		 * @return void
+		 */
+		public function unset_cookies() {
+			if ( function_exists( 'is_order_received_page' ) && is_order_received_page() ) {
+				$this->unset_php_cookies();
+			}
 
-		public function update_cookie_after_place_order( $order_id ) {
-			if ( ! $order_id ) {
+			if ( ! function_exists( 'WFOCU_Core' ) || ! class_exists( '\WFOCU_Offers' ) || is_null( WFOCU_Core()->offers ) ) {
 				return;
 			}
 
-			// Array of cookies to destroy
+			global $post;
+			$maybe_offer = WFOCU_Core()->offers->get_offer_from_post( $post );
+			if ( $maybe_offer ) {
+				$this->unset_php_cookies();
+			}
+		}
+
+		/**
+		 * Unset PHP cookies
+		 *
+		 * @return void
+		 */
+		protected function unset_php_cookies() {
+			if ( headers_sent() ) {
+				return;
+			}
+
 			$cookies_to_destroy = [
 				'fkcart_cart_total',
 				'fkcart_cart_qty'
@@ -1088,17 +1119,38 @@ if ( ! class_exists( '\FKCart\Includes\Front' ) ) {
 
 					// Destroy for all possible subdomains
 					setcookie( $cookie_name, '', time() - 3600, '/', $_SERVER['HTTP_HOST'] );
-
-
 				}
 			}
+		}
 
+		/**
+		 * Unset cookies via JavaScript and session storage of fkcart and wc
+		 *
+		 * @return void
+		 */
+		public function unset_js_cookies() {
 			?>
             <script type="text/javascript">
-
                 (function () {
+                    function unset_storage() {
+                        try {
+                            if (typeof sessionStorage !== 'undefined') {
+                                for (let i = sessionStorage.length - 1; i >= 0; i--) {
+                                    const key = sessionStorage.key(i);
+                                    if (key.startsWith('fkcart_') || key.startsWith('wc_')) {
+                                        sessionStorage.removeItem(key);
+                                    }
+                                }
+                            }
+                        } catch (e) {
+
+                        }
+                    }
+
                     // Run when the DOM is fully loaded
                     document.addEventListener('DOMContentLoaded', function () {
+                        // Unset Storage
+                        unset_storage();
                         // Array of cookies to destroy
                         var cookiesToDestroy = [
                             'fkcart_cart_total',
@@ -1132,12 +1184,8 @@ if ( ! class_exists( '\FKCart\Includes\Front' ) ) {
                         });
                     });
                 })();
-
             </script>
 			<?php
 		}
-
-
 	}
-
 }

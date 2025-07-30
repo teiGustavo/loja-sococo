@@ -7,63 +7,127 @@ Tested up to: 6.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Requires PHP: 5.6
-Stable tag: 2.13.0
+Stable tag: 2.14.0
 
 Create unlimited urgency and scarcity countdown timers for WordPress and WooCommerce to boost conversions and sales instantly.
 
 == Description ==
 
-[HurryTimer](https://hurrytimer.com/) is a multi-purpose countdown timer that allows you to create urgency and scarcity that drives clicks, increases sales, and highlights upcoming events or deadlines.
+[HurryTimer](https://hurrytimer.com/) is a flexible and lightweight plugin that lets you create **smart countdown timers** to add urgency and scarcity that drives clicks, increases sales, and highlights upcoming events or deadlines.
 
-Use HurryTimer to create:
+Easily create:
 
-**Evergreen campaigns:**
-Give each visitor their own unique countdown timer regardless of their local timezone and the moment they visited your site.
+- **Evergreen timers** personalized for each visitor
+- **One-time fixed-date timers** for global deadlines
+- **Recurring timers (PRO)** for repeating daily deals, shipping cutoffs, and more
 
-It's a great way to boost conversion by creating a feeling of scarcity, urgency and exclusivity.
+Works with any theme and all major page builders like **Elementor**, **Divi**, **Beaver Builder**, **WPBakery**, and **Gutenberg**.
 
-**One-time Campaigns:**
-Run a campaign between two fixed dates. No matter who visits your site the countdown timer is the same. It's a great way for event-based sales with a firm deadline.
+Whether you're running flash sales, promoting an event, or adding urgency to WooCommerce products, HurryTimer helps increase engagement and conversions — no coding required.
 
-**[PRO] Recurring campaigns:**
-Recurring campaigns are self repeating countdown timers that run according to a set of rules. 
+== ✅ FREE FEATURES ==
 
-It's great way for telling customers about shipping cut-off times to get them to checkout faster. 
+= 🔁 Evergreen Countdown Timers =  
 
-You can schedule minutely, hourly, daily, weekly, and monthly recurrences.
+Each visitor sees their **own unique countdown**, no matter when they visit.  
+Great for evergreen sales funnels and personalized campaigns.  
+Tracking methods:
+- Cookie-based  
+- IP-based
 
-### Lite Features
-- Evergreen & One-time countdown timers.
-- Cookie & IP detection technique for Evergreen campaigns.
-- WooCommerce integration.
-- Conditionally display countdown timer on product page
-- Expiry actions:
-  - Hide countdown timer
-  - Redirect to URL
-  - Display a message
-  - Change WooCommerce product stock status
-  - Hide WooCommerce product "Add to cart" button
-- Auto-Restart: Restart immediately, or at the next visit.
-- Live design customizer
-- Custom labels: days, hours, minutes, seconds.
-- Call-To-Action button.
-- Scheduled Campaigns.
-- Display the same countdown timer multiple times on the same page.
-- Compatible with all page builders out-of-the-box.
+= 📅 One-Time Countdown Timers = 
 
-### PRO Features
+Set a shared deadline for everyone — between a start and end date.  
+Perfect for:
+- Black Friday sales  
+- Webinar registrations  
+- Product launches
+
+= ⚙️ Expiry Actions =  
+
+Decide what happens when the timer reaches zero:
+- Hide the timer
+- Show a custom message
+- Redirect to a URL
+
+= 🛒 WooCommerce Integration =  
+Automatically show countdown timers on product pages and control actions when time expires:
+- Hide the “Add to Cart” button  
+
+= 🎨 Live Timer Styling =  
+Customize timer appearance in real time:  
+- Edit labels (Days, Hours, Minutes, Seconds)  
+- Set custom colors, spacing, and more  
+- Add a CTA button
+
+= ➕ More Free Features =  
+- Auto-restart timer (on revisit or immediately)  
+- Display one timer multiple times per page  
+
+== 🚀 PRO Features ==
 
 In addition to all features in Lite, HurryTimer Pro provides access to many other powerful features:
 
-- **Recurring Campaigns**: Schedule minutely, hourly, daily, weekly, and monthly campaigns.
-- **User Session** detection for evergreen timers, highly recommended for campaigns restricted to logged-in users.
-- **More Exiry Actions**: Expire WooCommerce coupon.
-- **Multiple Expiry Actions**: Take more than one action when time is up.
-- **Expire WooCommerce Coupon action**: Automatically expire a coupon code after timer reaches zero.
-- **Advanced Live Design Customizer**: Unlock more styling capabilities to create unlimited design variations.
-- **Live Custom CSS**: Add you own CSS code to every element.
-- **Sticky Announcement Bar**: Display the countdown timer at the bottom/top of the page.
-- **Priority Support**: Get responses fast with 24/7 email and chat support.
+= 🔁 Recurring Countdown Timers =  
+
+Recurring timers are countdowns that **automatically reset and start again** based on a defined schedule.  
+Unlike one-time timers that expire once, recurring timers **repeat continuously** on intervals you set, such as:  
+- Every minute  
+- Every hour  
+- Every day  
+- Every week  
+- Every month 
+
+**What is it used for?**  
+Recurring timers are perfect for campaigns and offers that happen regularly and need to restart without manual intervention. Examples include:  
+- Daily flash sales that reset every 24 hours  
+- Hourly countdowns for limited-time product availability  
+- Weekly shipping cut-off reminders (“Order before Friday 5 PM”)  
+- Monthly promotions that recur on specific dates  
+
+This feature helps create a persistent sense of urgency while automating timer resets to match your marketing calendar or business rules.  
+
+
+= 🎟️ Expire WooCommerce Coupons =  
+Set a timer to **automatically deactivate** specific WooCommerce coupon codes.  
+Great for:
+- Time-limited discounts  
+- Flash sales  
+- Cart recovery offers
+
+= 📌 Sticky Countdown Bar =  
+Display a fixed countdown timer at the **top or bottom** of the screen.  
+Visible across all pages or specific pages only.  
+Boosts visibility and urgency during active promotions.
+
+= ⏰ Custom Timezone =  
+Set a specific timezone for fixed-date and recurring timers instead of server timezone.  
+Ensures countdowns align perfectly with your intended audience’s local time.
+
+= 🔄 Restart Evergreen Timers After Specific Time =  
+Allows you to set a **waiting period before the evergreen timer restarts** for the same visitor.  
+For example, you can make the timer pause for 24 hours after expiring before showing a fresh countdown again.  
+This controls how often returning visitors see a new urgency window, preventing constant restarts.
+
+= 🌍 Ends Evergreen Timer at User’s Local Time =  
+Instead of ending the timer after a fixed duration from the first visit, this option makes the evergreen countdown expire at a specific time of day in the visitor’s **own local timezone**.  
+
+For example:  
+- The timer always ends at midnight local time for each visitor, regardless of when they started the countdown.  
+
+This creates urgency synced to each user’s day cycle, making offers feel more natural and timely worldwide.
+
+= ➕ Multiple Expiry Actions =  
+Trigger more than one action when a timer ends, such as hide timer + show message.  
+
+
+= 🎨 Advanced Design Controls =  
+Unlock extra customization options and inject **custom CSS** per timer.  
+Create visually consistent timers that match your site branding.
+
+= 🧑‍💼 Priority Support =  
+Get **fast, dedicated support** via email or chat.  
+
 
 [Check out HurryTimer PRO →](https://hurrytimer.com?utm_source=wp_repo&utm_medium=link&utm_campaign=free_version)
 
@@ -149,6 +213,16 @@ We improve HurryTimer continuously to fit your needs, if you have a feature requ
 
 
 == Changelog ==
+
+ 2.14.0 =
+
+* Temporarily removed the "Change stock status" expiry action as a precaution to prevent unauthorized product stock changes.
+* Minor bugfixes
+
+= 2.13.1 =
+
+* Stability improvements
+* Minor bugfixes
 
 = 2.13.0 =
 

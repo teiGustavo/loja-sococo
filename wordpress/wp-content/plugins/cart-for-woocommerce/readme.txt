@@ -2,9 +2,9 @@
 Contributors: xlplugins, amans2k
 Tags: WooCommerce Cart, Side Cart, Modern Cart, Floating Cart, WooCommerce Checkout
 Requires at least: 5.0
-Tested up to: 6.8.1
+Tested up to: 6.8.2
 Requires PHP: 7.0
-Stable tag: 1.8.1
+Stable tag: 1.9.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -217,6 +217,40 @@ You can display coupon codes on the FunnelKit side cart or even auto-apply the c
 
 
 == Change log ==
+
+= 1.9.1 =
+* Added: Compatibility with the 'WPC Variations Radio Buttons' plugin. Disallow quick-edit product selections in the side cart. (#858)
+* Added: Support for displaying recurring prices for WooCommerce Subscriptions in the cart order summary. (#844)
+* Improved: Resolved RTL display issues in the coupon section. (#847)
+* Improved: Pro: Improved HTML and popup visibility for the Special Addon feature on mobile devices. (#852)
+* Fixed: Issue with floating cart icon setting visibility has been resolved. (#854)
+
+= 1.9.0 =
+* Coming Soon with Funnel Builder Pro 3.11.0
+    - Special Addons Feature to help increase Average Order Value (AOV). (#815)
+    - Introduce customizable addons that enhance the checkout experience:
+        - Shipping Protection to safeguard customer purchases
+        - Extended Warranties or Support Plans
+        - Gift Wrapping options for special occasions
+        - New Arrival highlights to capture attention and boost visibility
+    - Cart Analytics Enhancements for actionable insights. (#815)
+        - Gain deeper visibility into cart behavior and customer interactions
+        - Use data-rich reports to optimize conversions and track key cart metrics
+* Added: Reward icon title translation support added. (#821)
+* Added: Alert for unsaved changes on the cart page to prevent data loss. (#800)
+* Added: A new setting for rewards to calculate on `total` instead of `subtotal`, providing better flexibility. (#831)
+* Added: Compatibility added with 'Order Minimum/Maximum Amount Limits for WooCommerce' plugin by 'WPFactory'. (#841)
+* Added: Compatibility added with 'YITH WooCommerce Minimum Maximum Quantity Premium' by YITH. (#834)
+* Added: Compatibility added with 'Price By Quantity for WooCommerce' plugin by WebMeteors. (#840)
+* Improved: Updated wc_cart_fragments handling and consolidated cart dependency initialization for better efficiency and reliability. (#819)
+* Improved: App settings UX enhanced. (#826)
+* Improved: Session storage and cookies handling improved after new order placement. (#828)
+* Improved: Tax display logic refined for more accurate presentation. (#831)
+* Improved: Compatibility with multilingual plugins improved by updating language code retrieval logic. (#803)
+* Improved: Cart style refined with multiple UX enhancements related to text, colors, and visibility. (#813)
+* Fixed: Compatibility checks updated for the WooCommerce Multilingual & Multicurrency plugin to ensure proper functionality. (#811)
+* Fixed: Disabled strike-through pricing for products with active subscription plans in the 'Buy Once or Subscribe for WooCommerce Subscriptions' plugin. (#809)
+* Fixed: Conditional rendering of carousel sections based on item count to enhance performance and user experience. (#830)
 
 = 1.8.1 =
 * Added: Continue Shopping: Re-added the 'Continue Shopping link' setting. (#749)

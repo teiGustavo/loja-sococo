@@ -511,6 +511,10 @@ class Campaign
 
     public $recurringUnselectedDaysAction = 'skip';
 
+    public $evergreenEndDay = 0;
+    public $evergreenEndTime = '';
+    public $evergreenEndType = 'duration';
+
     public function __construct($id)
     {
         $this->recurringStartTime = Carbon::now(hurryt_tz($this->getTimezone()))->format('Y-m-d h:i A');
@@ -711,7 +715,12 @@ class Campaign
         foreach ($data as $prop => $value) {
             $method = Helpers::snakeToCamelCase("set_{$prop}");
             if (method_exists($this, $method)) {
-                $this->$method($value ?: $this->$prop);
+                if($prop === 'timezone') {
+                    $this->setTimezone($value, $data['timezone_type']);
+                }
+                else{
+                    $this->$method($value ?: $this->$prop);
+                }
             } elseif (property_exists(__CLASS__, Helpers::snakeToCamelCase($prop))) {
                 $this->set_prop($prop, $value);
             }
@@ -827,9 +836,9 @@ class Campaign
     return '';
 
     }
-    public function setTimezone($timezone)
+    public function setTimezone($timezone, $timezone_type)
     {
-        if($this->timezoneType === 'site') {
+        if($timezone_type === 'site') {
            $timezone = '';
         }
 
@@ -2002,4 +2011,114 @@ class Campaign
     {
         return $this->recurringFrequency === C::RECURRING_MINUTELY;
     }
+
+    /**
+     * Get the end time for evergreen timers
+     * 
+     * @return string|null
+     */
+    public function getEndTime()
+    {
+        return $this->get_prop('end_time');
+    }
+
+    /**
+     * Set the end time for evergreen timers
+     * 
+     * @param string $time
+     */
+    public function setEndTime($time)
+    {
+        $this->set_prop('end_time', $time);
+    }
+
+    /**
+     * Get the cookie name for this campaign
+     * 
+     * @return string
+     */
+    public function getCookieName()
+    {
+        return Cookie_Detection::cookieName($this->id);
+    }
+
+    /**
+     * Get the reset token for this campaign
+     * 
+     * @return string|null
+     */
+    public function getResetToken()
+    {
+        $evergreenCampaign = new EvergreenCampaign($this->id);
+        $evergreenCampaign->loadSettings();
+        return $evergreenCampaign->getInitiatedResetToken();
+    }
+
+    /**
+     * Check if the campaign should reset
+     * 
+     * @return bool
+     */
+    public function shouldReset()
+    {
+        $evergreenCampaign = new EvergreenCampaign($this->id);
+        $evergreenCampaign->loadSettings();
+        return $evergreenCampaign->shouldResetTimer();
+    }
+
+    /**
+     * Get whether the campaign runs in background
+     * 
+     * @return bool
+     */
+    public function getRunInBackground()
+    {
+        return $this->get_prop('run_in_background', false);
+    }
+
+    /**
+     * Get the end day for evergreen timers
+     * 
+     * @return int
+     */
+    public function getEvergreenEndDay()
+    {
+        return (int)$this->get_prop('evergreen_end_day', false) ?: 0;
+    }
+
+    /**
+     * Set the end day for evergreen timers
+     * 
+     * @param int $day
+     */
+    public function setEvergreenEndDay($day)
+    {
+        $this->set_prop('evergreen_end_day', (int)$day);
+    }
+
+    public function getEvergreenEndTime()
+    {
+        return $this->get_prop('evergreen_end_time');
+    }
+
+    public function setEvergreenEndTime($time)  
+    {
+        $this->set_prop('evergreen_end_time', $time);
+    }
+
+    public function getEvergreenEndType()
+    {
+        return $this->get_prop('evergreen_end_type');
+    }
+
+    public function setEvergreenEndType($type){
+
+        // removeIf(pro)
+        if(! hurrytimer_is_pro() ){
+            $type = 'duration';
+        }
+        // endRemoveIf(pro)
+        $this->set_prop('evergreen_end_type', $type);
+    }
+
 }

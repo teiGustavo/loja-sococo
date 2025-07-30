@@ -32,18 +32,32 @@ class Onboard
 
             if (!empty($data['user_onboard_data']['email']) && !empty(is_email($data['user_onboard_data']['email']))) {
                 $args = [
-                    'email'           => $data['user_onboard_data']['email'],
-                    'environment_id'  => Onboard::ENVIRONMENT_ID,
-                    'contact_list_id' => Onboard::CONTACT_LIST_ID
+                    'email'           => sanitize_email( wp_unslash( $data['user_onboard_data']['email'] ) ),
+                    'slug'            => 'shopengine',
                 ];
-                Plugin_Data_Sender::instance()->sendAutomizyData('email-subscribe', $args);
+
+                $response = Plugin_Data_Sender::instance()->sendEmailSubscribeData( 'plugin-subscribe', $args );
             }
             update_option(Onboard::STATUS, true);
         }
 
-        return [
-            'status'  => 'success',
-            'message' => esc_html__('settings saved successfully.', 'shopengine')
-        ];
+       $response = array(
+        'status'  => 'success',
+        'message' => \ShopEngine\Core\Settings\Api::plugin_activate_message('setup_configurations')
+    );
+
+    $plugins = !empty($data['our_plugins']) && is_array($data['our_plugins']) ? $data['our_plugins'] : [];
+    
+        if($plugins) {
+            $total_plugins = count($plugins);
+            $total_steps   = 1 + $total_plugins;
+            $percentage = ($total_steps > 0) ? (1 / $total_steps) * 100 : 100;
+            $percentage = round($percentage);
+
+            $response['progress'] = $percentage;
+            $response['plugins'] = $plugins;
+        }
+
+        return $response;
     }
 }

@@ -1357,6 +1357,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     } else {
       $tzfield.insertAfter($regularAdjacent);
     }
-  });
+  }); // Handle evergreen end type
+
+  jQuery('#hurrytimer-evergreen-end-type').on('change', function () {
+    var value = jQuery(this).val();
+    var durationFields = jQuery('.hurrytimer-field-duration');
+    var timeFields = jQuery('.hurrytimer-field-time');
+
+    if (value === 'time') {
+      durationFields.hide();
+      timeFields.show(); // Set default time to midnight
+
+      jQuery('#hurrytimer-evergreen-end-time').val('00:00');
+    } else {
+      durationFields.show();
+      timeFields.hide();
+    }
+  }); // Initialize end type selection
+
+  jQuery('#hurrytimer-evergreen-end-type').trigger('change');
 })(jQuery);
 //# sourceMappingURL=admin.js.map

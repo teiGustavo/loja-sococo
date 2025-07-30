@@ -57,10 +57,6 @@ class Frontend {
         // Display campaign on product page.
         add_action('wp', [$this, 'render_on_product_page']);
 
-        // Change stock status for recurring/onetime campaign via Ajax.
-        add_action('wp_ajax_change_stock_status', [$this, 'ajax_change_stock_status']);
-        add_action('wp_ajax_nopriv_change_stock_status', [$this, 'ajax_change_stock_status']);
-
         // Log evergreen campaign start time for each visitor.
         add_action('wp_ajax_hurryt/update_timestamp', [$this, 'ajax_save_evergreen_start_time']);
         add_action('wp_ajax_nopriv_hurryt/update_timestamp', [$this, 'ajax_save_evergreen_start_time']);
@@ -179,22 +175,6 @@ class Frontend {
         foreach ($campaigns as $post) {
             echo do_shortcode(sprintf('[hurrytimer id="%d" sticky="true" ]', $post->ID));
         }
-    }
-
-    /**
-     * Apply change stock status
-     */
-    public function ajax_change_stock_status() {
-        check_ajax_referer('hurryt', 'nonce');
-        if (!isset($_POST['campaign_id'], $_POST['status'])) {
-            die(-1);
-        }
-        $id          = intval($_POST['campaign_id']);
-        $status      = sanitize_key($_POST['status']);
-        $wc_campaign = new WCCampaign();
-        $campaign    = new Campaign($id);
-        $wc_campaign->change_stock_status($campaign, $status);
-        die();
     }
 
     /**

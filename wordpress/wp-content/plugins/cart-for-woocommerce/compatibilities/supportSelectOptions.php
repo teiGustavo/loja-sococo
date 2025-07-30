@@ -12,6 +12,10 @@ if ( ! class_exists( '\FKCart\Compatibilities\SupportSelectOptions' ) ) {
 		 * @return bool
 		 */
 		public static function blacklisted_product( $product ) {
+			if ( ! $product instanceof \WC_Product ) {
+				return false;
+			}
+
 			/** AliPay */
 			if ( defined( 'ADSW_VERSION' ) ) {
 				return true;
@@ -27,6 +31,15 @@ if ( ! class_exists( '\FKCart\Compatibilities\SupportSelectOptions' ) ) {
 			$meta = $product->get_meta( '_product_addons' );
 			if ( ! empty( $meta ) && class_exists( '\WC_Product_Addons' ) ) {
 				return true;
+			}
+
+			/** WPC Variations Radio Buttons for WooCommerce (Premium) https://wpclever.net/ */
+			if ( class_exists( '\WPClever_Woovr' ) ) {
+				$active  = \WPClever_Woovr::get_setting( 'active', 'yes' );
+				$_active = $product->get_meta( '_woovr_active', true ) ?: 'default';
+				if ( $_active === 'yes' || ( $_active === 'default' && $active === 'yes' ) ) {
+					return true;
+				}
 			}
 
 			return false;

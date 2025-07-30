@@ -61,13 +61,6 @@ if (!empty($campaign->actions) && hurryt_is_woocommerce_activated()) {
 
                                         Hide "Add to cart" button
                                     </option>
-                                    <option value="<?php echo C::ACTION_CHANGE_STOCK_STATUS ?>" data-subfields="hurrytimer-action-stockstatus-subfields" <?php echo selected(
-                                                                                                                                                                $action['id'],
-                                                                                                                                                                C::ACTION_CHANGE_STOCK_STATUS
-                                                                                                                                                            ) ?>>
-                                        Change stock status
-                                    </option>
-
                                 </optgroup>
 
                             <?php endif; ?>

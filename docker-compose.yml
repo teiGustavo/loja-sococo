@@ -1,5 +1,6 @@
 services:
   db:
+    container_name: loja-sococo-db
     image: mysql:latest
     restart: always
     environment:
@@ -8,15 +9,18 @@ services:
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
     volumes:
-      - db_data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
       - ./init-db:/docker-entrypoint-initdb.d
     networks:
       - network
 
   wordpress:
+    container_name: loja-sococo-wordpress
     depends_on:
       - db
-    image: wordpress:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: always
     ports:
       - "80:80"
@@ -26,12 +30,12 @@ services:
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
     volumes:
-      - "./wordpress:/var/www/html/wordpress"
+      - "./wordpress:/var/www/html"
     networks:
       - network
 
-
   phpmyadmin:
+    container_name: loja-sococo-phpmyadmin
     image: phpmyadmin/phpmyadmin
     restart: always
     ports:
@@ -44,7 +48,7 @@ services:
       - network
 
 volumes:
-  db_data:
+  mysql-data:
 
 networks:
   network:

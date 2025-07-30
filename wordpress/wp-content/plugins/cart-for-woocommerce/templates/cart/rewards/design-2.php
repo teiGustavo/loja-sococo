@@ -31,9 +31,9 @@ if ( ! isset( $rewards ['subtotal'] ) && class_exists( 'FKCart\Pro\Rewards' ) ) 
 }
 ?>
 <div class="fkcart-reward-panel  fkcart-progress-container fkcart-design-modern <?php echo $preview_class; ?>">
-    <p class="fkcart-progress-title">
+    <div class="fkcart-progress-title">
 		<?php echo wp_kses_post( $rewards['title'] ) ?>
-    </p>
+    </div>
     <div class="fkcart-progress-bar">
         <div class="fkcart-milestone">
 			<?php

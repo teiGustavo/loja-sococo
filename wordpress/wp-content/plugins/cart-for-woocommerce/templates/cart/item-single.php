@@ -31,7 +31,7 @@ if ( ! empty( $_product->get_type() ) ) {
 ?>
 <div class="fkcart--item fkcart-panel <?php echo $is_you_saved_class . ' ' . implode( ' ', $fkcart_wrapper_class ); ?> <?php echo $cart_item['_fkcart_free_gift'] ? 'fkcart-free-item' : '' ?>" data-key="<?php esc_attr_e( $cart_item_key ) ?> ">
     <div class="fkcart-thumb-wrap">
-		<?php echo wp_kses_post( $cart_item['thumbnail'] ) ?>
+		<?php echo $cart_item['thumbnail']; ?>
 		<?php
 
 		if ( false === $cart_item['_fkcart_free_gift'] ) {

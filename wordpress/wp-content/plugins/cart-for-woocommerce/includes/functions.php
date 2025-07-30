@@ -365,3 +365,33 @@ if ( ! function_exists( 'fkcart_product_add_supported' ) ) {
 		return true;
 	}
 }
+
+if ( ! function_exists( 'fkcart_log_error' ) ) {
+	/**
+	 * Log error message
+	 *
+	 * @param $message
+	 * @param $type
+	 *
+	 * @return void
+	 * @since 1.9.0
+	 */
+	function fkcart_log_error( $message, $type = 'info' ) {
+		if ( ! function_exists( 'wc_get_logger' ) ) {
+			return;
+		}
+
+		$logger  = wc_get_logger();
+		$context = [ 'source' => 'fkcart_error' ];
+
+		if ( is_array( $message ) || is_object( $message ) ) {
+			$message = print_r( $message, true );
+		}
+
+		if ( $type === 'error' ) {
+			$logger->error( $message, $context );
+		} else {
+			$logger->info( $message, $context );
+		}
+	}
+}

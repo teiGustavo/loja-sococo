@@ -9,9 +9,12 @@ namespace Hurrytimer;
  */
 ?>
 <div class="hidden mode-settings" data-for="hurrytModeRecurring" <?php //removeIf(pro) 
-                                                                    ?> data-hurryt-pro="wrap" <?php //endRemoveIf(pro) 
+                                                                    ?> 
+                                                                    <?php echo !hurrytimer_is_pro() ? 'data-hurryt-pro="wrap"' : ''; ?>
+                                                                    <?php //endRemoveIf(pro) 
                                                                                                 ?>>
     <?php //removeIf(pro) 
+    if(!hurrytimer_is_pro()):
     ?>
     <div class="hurryt-upgrade-alert hurryt-upgrade-alert-inline" data-hurryt-pro="notice">
         <div class="hurryt-upgrade-alert-header">
@@ -25,10 +28,11 @@ namespace Hurrytimer;
             <a href="https://hurrytimer.com?utm_source=plugin&utm_medium=recurring_mode&utm_campaign=learn_more" class="button">Learn more</a>
         </div>
     </div>
+    <?php endif; ?>
     <?php //endRemoveIf(pro) 
     ?>
     <table class="hurrytimer-recurring form-table" <?php //removeIf(pro) 
-                                ?> data-hurryt-pro="feature" <?php //endRemoveIf(pro) 
+                                ?> <?php echo !hurrytimer_is_pro() ? 'data-hurryt-pro="feature"' : ''; ?> <?php //endRemoveIf(pro) 
                                                                 ?>>
         <tr class="form-field">
             <td><label><?php _e('Recur every', "hurrytimer") ?></label></td>

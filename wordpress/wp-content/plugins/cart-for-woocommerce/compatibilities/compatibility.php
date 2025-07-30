@@ -37,10 +37,11 @@ if ( ! class_exists( '\FKCart\Compatibilities\Compatibility' ) ) {
 				'wcrewardpoints.php'                         => class_exists( '\WC_Points_Rewards' ),
 				'wcstripe.php'                               => function_exists( 'woocommerce_gateway_stripe' ),
 				'woocommerce-product-bundles.php'            => class_exists( '\WC_Bundles' ),
+				'woocommerceSubscriptionByWC.php'            => class_exists( '\WC_Subscriptions' ),
 				'woocs.php'                                  => class_exists( '\WOOCS' ),
 				'woomulticurrency.php'                       => defined( 'WOOMULTI_CURRENCY_F_VERSION' ) || defined( 'WOOMULTI_CURRENCY_VERSION' ),
 				'wooProductBundle.php'                       => defined( 'WOOSB_DIR' ),
-				'wpml-multicurrency.php'                     => class_exists( '\SitePress' ),
+				'wpml-multicurrency.php'                     => class_exists( '\woocommerce_wpml' ),
 				'litespeed.php'                              => defined( 'LSCWP_V' ),
 				'klarna.php'                                 => class_exists( '\WC_Klarna_Payments' ) && defined( 'WFFN_PRO_FILE' ),
 				'funnelkitcheckout.php'                      => class_exists( '\WFACP_Core' ),
@@ -65,6 +66,7 @@ if ( ! class_exists( '\FKCart\Compatibilities\Compatibility' ) ) {
 				try {
 					include_once __DIR__ . '/' . $file;
 				} catch ( \Exception|\Error $e ) {
+					fkcart_log_error( $e->getMessage() );
 					if ( defined( 'BWF_DEV' ) && true === BWF_DEV ) {
 						trigger_error( $e->getMessage() );
 					}
@@ -87,14 +89,17 @@ if ( ! class_exists( '\FKCart\Compatibilities\Compatibility' ) ) {
 				'pricebasedcountry.php'            => function_exists( '\wcpbc' ),
 				'flexibleshipping.php'             => defined( 'FLEXIBLE_SHIPPING_VERSION' ),
 				'wpml.php'                         => class_exists( '\SitePress' ),
-				'polylang.php'                     => defined( 'POLYLANG_PRO' ) && defined( 'PLLWC_VERSION' ),
+				'polylang.php'                     => defined( 'PLLWC_VERSION' ),
 				'rightpresspricinganddiscount.php' => defined( 'RP_WCDPD_PLUGIN_PATH' ),
 				'germanized.php'                   => class_exists( '\WooCommerce_Germanized' ),
 				'paypalpayments.php'               => function_exists( '\WooCommerce\PayPalCommerce\init' ),
 				'yaycurrency.php'                  => defined( 'YAY_CURRENCY_FILE' ),
-
+				'translatepress.php'               => class_exists( '\TRP_Translate_Press' ),
+				'weglot.php'                       => defined( 'WEGLOT_SLUG' ),
+				'yithminmaxqty.php'                => defined( 'YWMMQ_VERSION' ),
+				'pricebyquantity.php'              => defined( 'WP_PBQ_DIR' ),
+				'wpfactoryminmaxamount.php'        => class_exists( '\Alg_WC_OMA' )
 			];
-
 			self::add_files( $files );
 		}
 
@@ -107,13 +112,18 @@ if ( ! class_exists( '\FKCart\Compatibilities\Compatibility' ) ) {
 		}
 
 		public static function remove_smart_buttons() {
-			if ( empty( self::$plugin_compatibilities ) ) {
-				return '';
-			}
-			foreach ( self::$plugin_compatibilities as $plugins_class ) {
-				if ( method_exists( $plugins_class, 'is_enable' ) && $plugins_class->is_enable() && is_callable( array( $plugins_class, 'remove_smart_buttons' ) ) ) {
-					return $plugins_class->remove_smart_buttons();
+			try {
+				if ( empty( self::$plugin_compatibilities ) ) {
+					return '';
 				}
+				foreach ( self::$plugin_compatibilities as $plugins_class ) {
+					if ( method_exists( $plugins_class, 'is_enable' ) && $plugins_class->is_enable() && is_callable( array( $plugins_class, 'remove_smart_buttons' ) ) ) {
+						return $plugins_class->remove_smart_buttons();
+					}
+				}
+
+			} catch ( \Exception|\Error $e ) {
+				fkcart_log_error( $e->getMessage() );
 			}
 		}
 
@@ -126,17 +136,50 @@ if ( ! class_exists( '\FKCart\Compatibilities\Compatibility' ) ) {
 		}
 
 		public static function get_fixed_currency_price( $price, $currency = null ) {
-			if ( empty( self::$plugin_compatibilities ) ) {
-				return $price;
-			}
-
-			foreach ( self::$plugin_compatibilities as $plugins_class ) {
-				if ( method_exists( $plugins_class, 'is_enable' ) && $plugins_class->is_enable() && is_callable( array( $plugins_class, 'alter_fixed_amount' ) ) ) {
-					return $plugins_class->alter_fixed_amount( $price, $currency );
+			try {
+				if ( empty( self::$plugin_compatibilities ) ) {
+					return $price;
 				}
+
+				foreach ( self::$plugin_compatibilities as $plugins_class ) {
+					if ( method_exists( $plugins_class, 'is_enable' ) && $plugins_class->is_enable() && is_callable( array( $plugins_class, 'alter_fixed_amount' ) ) ) {
+						return $plugins_class->alter_fixed_amount( $price, $currency );
+					}
+				}
+			} catch ( \Exception|\Error $e ) {
+				fkcart_log_error( $e->getMessage() );
 			}
 
 			return $price;
+		}
+
+		/**
+		 * Return the Current language code of the website
+		 * @return array
+		 *
+		 */
+		public static function get_language_code() {
+			$language_code = '';
+			try {
+				if ( empty( self::$plugin_compatibilities ) ) {
+					return \FKCart\Includes\Data::get_language_code();
+				}
+				foreach ( self::$plugin_compatibilities as $plugins_class ) {
+
+					if ( method_exists( $plugins_class, 'is_enable' ) && $plugins_class->is_enable() && is_callable( array( $plugins_class, 'get_language_code' ) ) ) {
+						$language_code = $plugins_class->get_language_code();
+						break;
+					}
+				}
+			} catch ( \Exception|\Error $e ) {
+				fkcart_log_error( $e->getMessage() );
+			}
+
+			if ( ! empty( $language_code ) ) {
+				return [ $language_code ];
+			}
+
+			return \FKCart\Includes\Data::get_language_code();
 		}
 
 	}

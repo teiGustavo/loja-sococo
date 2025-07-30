@@ -85,15 +85,20 @@ if ( empty( $cart_contents ) ) {
             </div>
         </div>
 
-        <!-- Carousel Navigation -->
-        <div class="fkcart-nav-btn fkcart-nav-btn--prev" type="button">
-			<?php fkcart_get_template_part( 'icon/arrow', '', [ 'direction' => 'left' ] ); ?>
-        </div>
-        <div class="fkcart-nav-btn fkcart-nav-btn--next" type="button">
-			<?php fkcart_get_template_part( 'icon/arrow', '', [ 'direction' => 'right' ] ); ?>
-        </div>
-
-        <!-- Carousel Dots -->
+		<?php
+		if ( $count > 1 ) {
+			?>
+            <!-- Carousel Navigation -->
+            <div class="fkcart-nav-btn fkcart-nav-btn--prev" type="button">
+				<?php fkcart_get_template_part( 'icon/arrow', '', [ 'direction' => 'left' ] ); ?>
+            </div>
+            <div class="fkcart-nav-btn fkcart-nav-btn--next" type="button">
+				<?php fkcart_get_template_part( 'icon/arrow', '', [ 'direction' => 'right' ] ); ?>
+            </div>
+            <!-- Carousel Dots -->
+			<?php
+		}
+		?>
 		<?php
 		echo ( $count > 1 ) ? '<div class="fkcart-carousel-dots"></div>' : '<div class="fkcart-no-carousel"></div>';
 		?>

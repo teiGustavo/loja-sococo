@@ -4,15 +4,23 @@ global $post_id;
 <table class="form-table hidden mode-settings" data-for="hurrytModeEvergreen">
 
     <tr class="form-field">
-        <td>
-            <label><?php _e( 'Ends after', "hurrytimer" ) ?></label>
+        <td style="padding-bottom: 0;">
+            <label>
+                <select name="evergreen_end_type" id="hurrytimer-evergreen-end-type">
+                    <option value="duration" <?php selected($campaign->getEvergreenEndType(), 'duration') ?>>
+                        <?php _e( "Ends after", "hurrytimer" ) ?>
+                    </option>
+                    <option value="time" <?php selected($campaign->getEvergreenEndType(), 'time') ?> >
+                        <?php _e( "Ends at", "hurrytimer" ) ?>
+                    </option>
+                </select>
+                <span class="hurryt-icon hurryt-ml-1 <?php echo $campaign->getEvergreenEndType() === 'time' ? '' : 'hidden' ?>" id="hurryt-ends-at-tooltip" data-icon="help" title="<?php esc_attr_e('Set a specific time and day when the countdown should end. If the time has already passed on the same day, it will automatically move to the next occurrence.', 'hurrytimer') ?>" style="vertical-align: middle;"></span>
+            </label>
         </td>
         <td>
-            <div class="hurrytimer-field-duration">
-
+            <div class="hurrytimer-field-duration" <?php echo $campaign->getEvergreenEndType() === 'duration' ? '' : 'style="display:none;"' ?>>
                 <label>
                     <?php _e( "Days", "hurrytimer" ) ?>
-
                     <input type="number"
                            class="hurrytimer-duration"
                            name="duration[]"
@@ -29,7 +37,6 @@ global $post_id;
                            data-index="1"
                            value="<?php echo $campaign->duration[ 1 ] ?>"
                     >
-
                 </label>
                 <label>
                     <?php _e( "Minutes", "hurrytimer" ) ?>
@@ -40,7 +47,6 @@ global $post_id;
                            data-index="2"
                            value="<?php echo $campaign->duration[ 2 ] ?>"
                     >
-
                 </label>
                 <label>
                     <?php _e( "Seconds", "hurrytimer" ) ?>
@@ -50,8 +56,30 @@ global $post_id;
                            data-index="3"
                            value="<?php echo $campaign->duration[ 3 ] ?>"
                     >
-
                 </label>
+            </div>
+
+            <div class="hurrytimer-field-time hurryt-w-full" <?php echo $campaign->getEvergreenEndType() === 'time' ? '' : 'style="display:none"' ?>>
+                <?php if (!defined('HURRYT_IS_PRO') || !HURRYT_IS_PRO): ?>
+                <p class="description" style="margin-bottom: 10px;">
+                    <span class="dashicons dashicons-lock" style="color:#828282"></span>
+                    <b>Ends At</b> is a pro feature. <a href="http://hurrytimer.com/#pricing?utm_source=plugin&utm_medium=ends_at&utm_campaign=upgrade">Upgrade now</a>.
+                </p>
+                <?php endif; ?>
+                <div class="hurryt-flex hurryt-items-center hurryt-gap-2">
+                    <input type="time" name="evergreen_end_time" id="evergreen_end_time" value="<?php echo esc_attr($campaign->getEvergreenEndTime()) ?>" class="hurryt-w-32 <?php echo !defined('HURRYT_IS_PRO') || !HURRYT_IS_PRO ? 'disabled' : '' ?>" <?php echo !defined('HURRYT_IS_PRO') || !HURRYT_IS_PRO ? 'disabled' : '' ?>>
+                    &nbsp;<span><?php _e('on', 'hurrytimer') ?></span>&nbsp;
+                    <select name="evergreen_end_day" id="evergreen_end_day" class="hurryt-w-40 <?php echo !defined('HURRYT_IS_PRO') || !HURRYT_IS_PRO ? 'disabled' : '' ?>" <?php echo !defined('HURRYT_IS_PRO') || !HURRYT_IS_PRO ? 'disabled' : '' ?>>
+                        <option value="0" <?php selected($campaign->getEvergreenEndDay(), 0) ?>><?php _e('Same day', 'hurrytimer') ?></option>
+                        <option value="1" <?php selected($campaign->getEvergreenEndDay(), 1) ?>><?php _e('Next day', 'hurrytimer') ?></option>
+                        <option value="2" <?php selected($campaign->getEvergreenEndDay(), 2) ?>><?php _e('2 days later', 'hurrytimer') ?></option>
+                        <option value="3" <?php selected($campaign->getEvergreenEndDay(), 3) ?>><?php _e('3 days later', 'hurrytimer') ?></option>
+                        <option value="4" <?php selected($campaign->getEvergreenEndDay(), 4) ?>><?php _e('4 days later', 'hurrytimer') ?></option>
+                        <option value="5" <?php selected($campaign->getEvergreenEndDay(), 5) ?>><?php _e('5 days later', 'hurrytimer') ?></option>
+                        <option value="6" <?php selected($campaign->getEvergreenEndDay(), 6) ?>><?php _e('6 days later', 'hurrytimer') ?></option>
+                        <option value="7" <?php selected($campaign->getEvergreenEndDay(), 7) ?>><?php _e('7 days later', 'hurrytimer') ?></option>
+                    </select>
+                </div>
             </div>
         </td>
     </tr>
@@ -222,7 +250,25 @@ global $post_id;
                             class="button button-default" id="hurrytResetAll">For all visitors...
                     </button>
                 </div>
+                <p class="description">Reset the countdown timer to apply changes for existing users who have an active timer.</p>
+
             </td>
         </tr>
     <?php endif; ?>
 </table>
+
+<script>
+jQuery(document).ready(function($) {
+    $('#hurrytimer-evergreen-end-type').on('change', function() {
+        $('#hurryt-ends-at-tooltip').toggleClass('hidden', $(this).val() !== 'time');
+    });
+});
+</script>
+
+<style>
+.hurrytimer-field-time input.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #f0f0f0;
+}
+</style>

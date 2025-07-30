@@ -1,0 +1,7 @@
+2025-07-29T05:25:16+00:00 - 172.20.0.1 Funnel ID #1: require('wp-blog-header.php'), wp, WP->main, WP->parse_request, do_action_ref_array('parse_request'), WP_Hook->do_action, WP_Hook->apply_filters, rest_api_loaded, WP_REST_Server->serve_request, WP_REST_Server->dispatch, WP_REST_Server->respond_to_request, WFFN_REST_Funnels->import_template, WFFN_Importer->import_from_json_data, WFFN_Step_WC_Checkout->_process_import, WFFN_Step_Base->add_step, WFFN_Funnel->add_step, WFFN_Funnel->save
+2025-07-29T05:25:16+00:00 - 172.20.0.1 Funnel ID #1: require('wp-blog-header.php'), wp, WP->main, WP->parse_request, do_action_ref_array('parse_request'), WP_Hook->do_action, WP_Hook->apply_filters, rest_api_loaded, WP_REST_Server->serve_request, WP_REST_Server->dispatch, WP_REST_Server->respond_to_request, WFFN_REST_Funnels->import_template, WFFN_Importer->import_from_json_data, WFFN_Step_WC_Thankyou->_process_import, WFFN_Step_WC_Thankyou->add_step, WFFN_Step_Base->add_step, WFFN_Funnel->add_step, WFFN_Funnel->save
+2025-07-29T05:53:10+00:00 - 172.20.0.1 Order #748: Thankyou page #726 viewed successfully
+2025-07-29T05:53:10+00:00 - 172.20.0.1 Order #748: wfty thankyou page id #726
+2025-07-29T05:54:08+00:00 - 172.20.0.1 Order #748: Thankyou page #726 viewed successfully
+2025-07-29T05:54:08+00:00 - 172.20.0.1 Order #748: wfty thankyou page id #726
+2025-07-29T20:37:29+00:00 - 172.21.0.1 Order #915: Thankyou page #10 viewed successfully

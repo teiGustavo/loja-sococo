@@ -141,16 +141,19 @@ if ( ! class_exists( '\FKCart\Admin\App_Ajax' ) ) {
 			$term           = isset( $_POST['search'] ) ? sanitize_text_field( $_POST['search'] ) : '';
 			$image_show     = isset( $_POST['img_show'] ) && 1 === intval( $_POST['img_show'] ) ? sanitize_text_field( $_POST['img_show'] ) : 0;
 			$show_variation = isset( $_POST['variations'] ) && 0 === intval( $_POST['variations'] ) ? 0 : 1;
+			$special_addon  = isset( $_POST['special_addon'] ) && ( 'yes' === $_POST['special_addon'] );
 			$like_term      = '%' . $wpdb->esc_like( $term ) . '%';
-			$post_statuses  = current_user_can( 'edit_private_products' ) ? array(
-				'private',
-				'publish',
-			) : array( 'publish' );
+			$post_statuses  = [ 'publish' ];
 
-			$p_ids = $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT posts.ID FROM {$wpdb->posts} AS posts LEFT JOIN {$wpdb->prefix}wc_product_meta_lookup AS product_meta_lookup ON posts.ID = product_meta_lookup.product_id WHERE (posts.post_title LIKE %s OR product_meta_lookup.sku LIKE %s OR posts.ID LIKE %s) AND posts.post_status IN ('" . implode( "','", $post_statuses ) . "') AND posts.post_type = 'product' ORDER BY posts.post_parent ASC, posts.post_title ASC LIMIT 10", $like_term, $like_term, $like_term ) ); //phpcs:ignore WordPress.DB.PreparedSQL,WordPress.DB.PreparedSQLPlaceholders
+			$p_ids = $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT posts.ID FROM {$wpdb->posts} AS posts LEFT JOIN {$wpdb->prefix}wc_product_meta_lookup AS product_meta_lookup ON posts.ID = product_meta_lookup.product_id WHERE (posts.post_title LIKE %s OR product_meta_lookup.sku LIKE %s OR posts.ID LIKE %s) AND posts.post_status IN ('" . implode( "','", $post_statuses ) . "') AND posts.post_type = 'product' ORDER BY posts.post_parent ASC, posts.post_title ASC LIMIT 30", $like_term, $like_term, $like_term ) ); //phpcs:ignore WordPress.DB.PreparedSQL,WordPress.DB.PreparedSQLPlaceholders
 
-			$products = [];
+			$products = $base_products = [];
 			foreach ( $p_ids as $pid ) {
+				/** Need to send 10 products only in the request */
+				if ( count( $base_products ) >= 10 ) {
+					break;
+				}
+
 				$prod_obj = wc_get_product( $pid );
 				if ( ! $prod_obj instanceof \WC_Product ) {
 					continue;
@@ -158,11 +161,29 @@ if ( ! class_exists( '\FKCart\Admin\App_Ajax' ) ) {
 
 				/** Type checking */
 				$type = $prod_obj->get_type();
-				if ( ! wc_products_array_filter_editable( $prod_obj ) || ! fkcart_product_add_supported( $prod_obj ) || 'publish' !== $prod_obj->get_status() ) {
+
+				/** Special addon handling */
+				if ( $special_addon && in_array( $type, [
+						'booking',
+						'gift-card',
+						'yith_bundle',
+						'variable-subscription',
+						'subscription_variation',
+						'subscription',
+						'virtual_subscription',
+						'bundle',
+						'woosb',
+						'braintree-subscription',
+						'braintree-variable-subscription',
+					] ) ) {
+					continue;
+				}
+				if ( ! wc_products_array_filter_editable( $prod_obj ) || ! fkcart_product_add_supported( $prod_obj ) ) {
 					continue;
 				}
 
-				$products[] = $this->get_product_data( $prod_obj, $image_show );
+				$products[]      = $this->get_product_data( $prod_obj, $image_show );
+				$base_products[] = $pid;
 				if ( ! in_array( $type, [ 'variable', 'variable-subscription' ], true ) ) {
 					continue;
 				}

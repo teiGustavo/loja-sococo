@@ -47,6 +47,8 @@ class DB {
 		$data = [
 			'enable_strike_through_discounted_price' => true,
 			'show_shop_continue_link'                => false,
+			'enable_special_addon'                   => true,
+			'reward_progress_bar_style'              => 'modern',
 		];
 		update_option( 'fkcart_settings', $data, false );
 
@@ -129,6 +131,7 @@ class DB {
 			'1.7.1' => '1_7_1',
 			'1.7.2' => '1_7_2',
 			'1.8.1' => '1_8_1',
+			'1.8.2' => '1_8_2',
 		);
 
 		$db_options = get_option( 'fkcart_db_options', [] );
@@ -219,6 +222,42 @@ class DB {
 		$primary_color = $data['css_primary_text_color'] ?? '#353030';
 
 		$data['strike_through_price_color'] = $primary_color;
+		update_option( 'fkcart_settings', $data, false );
+
+
+		$this->update_db_version( $version_key );
+	}
+
+	/**
+	 * 1.8.2
+	 *
+	 * @param $version_key
+	 *
+	 * @return void
+	 */
+	protected function db_update_1_8_2( $version_key ) {
+		if ( in_array( '1.0.0', $this->db_version, true ) ) {
+			$this->update_db_version( $version_key );
+
+			return;
+		}
+
+		/** Update special addon style */
+		$data = Data::get_settings();
+
+		$bg_color   = $data['css_bg_color'] ?? '#f9f9ff';
+		$text_color = $data['css_primary_text_color'] ?? '#353030';
+		$btn_color  = $data['strike_through_price_color'] ?? '#2DA815';
+
+		$upsell_enabled = Data::is_upsells_enabled();
+		if ( $upsell_enabled ) {
+			$bg_color = $data['css_upsell_bg_color'] ?? $bg_color;
+		}
+
+		$data['special_addon_bg_color']      = $bg_color;
+		$data['special_addon_heading_color'] = $text_color;
+		$data['special_addon_toggle_color']  = $btn_color;
+
 		update_option( 'fkcart_settings', $data, false );
 
 

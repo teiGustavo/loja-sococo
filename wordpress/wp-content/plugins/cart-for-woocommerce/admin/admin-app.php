@@ -230,7 +230,7 @@ if ( ! class_exists( '\FKCart\Admin\Admin_App' ) ) {
 			}
 
 			$build_dir  = $this->admin_path . '/app/dist';
-			$app_name   = 'main-1749229123';
+			$app_name   = 'main-1752153607';
 			$app_name   = str_replace( '-{{{APP_VERSION}}}', '', $app_name );
 			$script_dir = ( 1 === FKCART_REACT_ENVIRONMENT ) ? FKCART_REACT_PROD_URL : FKCART_REACT_DEV_URL;
 

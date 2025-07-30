@@ -1,0 +1,136 @@
+.elementor-63 .elementor-element.elementor-element-51f7dc1{--display:flex;--flex-direction:row;--container-widget-width:initial;--container-widget-height:100%;--container-widget-flex-grow:1;--container-widget-align-self:stretch;--flex-wrap-mobile:wrap;--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-widget-ma-image-carousel .jltma-image-carousel-slider .jltma-image-carousel-figure a i{color:var( --e-global-color-primary );}.elementor-widget-ma-image-carousel .jltma-image-carousel-slider .jltma-image-carousel-figure a svg{fill:var( --e-global-color-primary );}.elementor-lightbox .dialog-message .elementor-slideshow__footer .elementor-slideshow__title, .fancybox-container.fancybox-is-open .fancybox-caption__body .jltma-fancybox-caption .jltma-image-carousel-title{font-family:var( --e-global-typography-secondary-font-family ), Sans-serif;font-weight:var( --e-global-typography-secondary-font-weight );color:var( --e-global-color-primary );transform:rotate(0deg);}.elementor-lightbox .dialog-message .elementor-slideshow__footer .elementor-slideshow__description, .fancybox-container.fancybox-is-open .fancybox-caption__body .jltma-fancybox-caption .jltma-image-carousel-subtitle{font-family:var( --e-global-typography-secondary-font-family ), Sans-serif;font-weight:var( --e-global-typography-secondary-font-weight );color:var( --e-global-color-primary );transform:rotate(0deg);}.elementor-63 .elementor-element.elementor-element-6371608 .swiper{padding:10px;margin:0 -10px;}.elementor-63 .elementor-element.elementor-element-6371608 .jltma-image-carousel-slider .jltma-image-carousel-figure a i{font-size:20px;}.elementor-63 .elementor-element.elementor-element-6371608 .jltma-image-carousel-slider .jltma-image-carousel-figure a svg{height:20px;width:20px;}.elementor-63 .elementor-element.elementor-element-6371608 .jltma-image-carousel-slider .jltma-image-carousel-figure a i, .elementor-63 .elementor-element.elementor-element-6371608 .jltma-image-carousel-slider .jltma-image-carousel-figure a svg{right:20px;top:20px;}.elementor-63 .elementor-element.elementor-element-6371608 .jltma-arrows .jltma-arrow--prev i, .elementor-63 .elementor-element.elementor-element-6371608 .jltma-arrows .jltma-arrow--next i,.elementor-63 .elementor-element.elementor-element-6371608 .jltma-image-carousel-wrapper .jltma-arrows .jltma-arrow--prev i, .elementor-63 .elementor-element.elementor-element-6371608 .jltma-image-carousel-wrapper .jltma-arrows .jltma-arrow--next i{font-size:24px;}.elementor-63 .elementor-element.elementor-element-6371608 .jltma-image-carousel-slider .jltma-arrows .jltma-arrow--prev{left:-60px;}.elementor-63 .elementor-element.elementor-element-6371608 .jltma-image-carousel-slider .jltma-arrows .jltma-arrow--next{right:-60px;}.elementor-63 .elementor-element.elementor-element-4fd0192{--display:flex;--flex-direction:row;--container-widget-width:initial;--container-widget-height:100%;--container-widget-flex-grow:1;--container-widget-align-self:stretch;--flex-wrap-mobile:wrap;}.elementor-63 .elementor-element.elementor-element-73fcc50{--display:flex;--flex-direction:row;--container-widget-width:initial;--container-widget-height:100%;--container-widget-flex-grow:1;--container-widget-align-self:stretch;--flex-wrap-mobile:wrap;}.elementor-63 .elementor-element.elementor-element-8bab5c8{--display:flex;--flex-direction:row;--container-widget-width:initial;--container-widget-height:100%;--container-widget-flex-grow:1;--container-widget-align-self:stretch;--flex-wrap-mobile:wrap;--padding-top:15px;--padding-bottom:15px;--padding-left:15px;--padding-right:15px;}.elementor-63 .elementor-element.elementor-element-8bab5c8:not(.elementor-motion-effects-element-type-background), .elementor-63 .elementor-element.elementor-element-8bab5c8 > .elementor-motion-effects-container > .elementor-motion-effects-layer{background-color:var( --e-global-color-secondary );}.elementor-widget-heading .elementor-heading-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-weight:var( --e-global-typography-primary-font-weight );color:var( --e-global-color-primary );}.elementor-63 .elementor-element.elementor-element-e2d8ca0.elementor-element{--align-self:center;}.elementor-63 .elementor-element.elementor-element-a9c1158{--display:flex;--flex-direction:row;--container-widget-width:initial;--container-widget-height:100%;--container-widget-flex-grow:1;--container-widget-align-self:stretch;--flex-wrap-mobile:wrap;}.elementor-63 .elementor-element.elementor-element-8d7a21b{width:100%;max-width:100%;}@media(max-width:1024px){.elementor-63 .elementor-element.elementor-element-6371608 .jltma-arrows .jltma-arrow--prev i, .elementor-63 .elementor-element.elementor-element-6371608 .jltma-arrows .jltma-arrow--next i,.elementor-63 .elementor-element.elementor-element-6371608 .jltma-image-carousel-wrapper .jltma-arrows .jltma-arrow--prev i, .elementor-63 .elementor-element.elementor-element-6371608 .jltma-image-carousel-wrapper .jltma-arrows .jltma-arrow--next i{font-size:24px;}}@media(max-width:767px){.elementor-63 .elementor-element.elementor-element-6371608 .jltma-arrows .jltma-arrow--prev i, .elementor-63 .elementor-element.elementor-element-6371608 .jltma-arrows .jltma-arrow--next i,.elementor-63 .elementor-element.elementor-element-6371608 .jltma-image-carousel-wrapper .jltma-arrows .jltma-arrow--prev i, .elementor-63 .elementor-element.elementor-element-6371608 .jltma-image-carousel-wrapper .jltma-arrows .jltma-arrow--next i{font-size:24px;}}/* Start custom CSS for product_slider_shortcode, class: .elementor-element-59ac6a8 */div#wps-slider-section{
+    padding-top: 0 !important;
+}
+
+.wpsp-pagination-dot{
+    display: none !important;
+}
+
+.swiper-button-prev, .swiper-button-next{
+    background: #f5f5f5 !important;
+    border: 1px solid #e6e6e6 !important;
+    border-radius: 50% !important;
+    height: 48px !important;
+    top: 45% !important;
+    width: 48px !important;
+    z-index: 2 !important;
+}
+
+.swiper-button-prev{
+    right: auto !important;
+    left: -17px !important;
+}
+
+.swiper-button-next{
+    left: auto !important;
+    right: -17px !important;
+}
+
+.swiper-button-prev .fa-angle-left, .swiper-button-next .fa-angle-right{
+    font-size: 40px !important;
+}
+
+.swiper-button-prev:hover, .swiper-button-next:hover{
+    color: #f10010 !important;
+}
+
+.wps-product-data{
+    background-color: #fff !important;
+    border: 1px solid #f0f3f4 !important;
+    border-radius: 5px !important;
+    box-shadow: 0 2px 8px 0 rgba(99, 99, 99, .2) !important;
+    height: 100% !important;
+    margin: 0 2px 24px !important;
+    padding: 12px 12px 24px !important;
+}
+
+
+.sp-wps-product-image-area img{
+    border: 0 !important;
+}
+
+.sp-wps-product-details{
+    padding: 0 !important;
+}
+
+.wpsf-product-title a{
+    color: #333 !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.1 !important;
+    margin-top: 12px !important;
+    text-align: left !important;
+    -webkit-text-decoration: none !important;
+    text-decoration: none !important;
+    width: 100% !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+    display: -webkit-box !important;
+    overflow: hidden !important;
+    padding-right: 1rem !important;
+    position: relative !important;
+    text-overflow: ellipsis !important;
+}
+
+.wpsf-product-price{
+    color: #121212 !important;
+    font-size: 23px !important;
+    font-weight: 900 !important;
+    margin: 10px 0 !important;
+}
+
+del{
+    font-size: 18px !important;
+}
+
+del span.woocommerce-Price-amount.amount{
+    color: #999 !important;
+    font-size: 17px !important;
+    font-weight: 400 !important;
+}
+
+.add_to_cart_inline a{
+    border: 1px solid #686868 !important;
+}
+
+
+.add_to_cart_inline a:hover{
+    color: #fff !important;
+    background-color: #f10010 !important;
+    border-color: #f10010 !important;
+    
+}/* End custom CSS */
+/* Start custom CSS for container, class: .elementor-element-8bab5c8 */label {
+    color: white !important;
+}
+
+form {
+    display: flex;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.wpforms-field-container {
+    display: flex;
+    width: 70%;
+}
+
+.wpforms-788-field_1-container {
+    width: 50%;
+}
+
+.wpforms-788-field_2-container {
+    width: 50%;
+}
+
+.wpforms-submit-container {
+    padding: 15px 0 16px 0 !important;
+    width: 18.5% !important;
+}
+
+.newsletter-button {
+    background: transparent !important;
+    border: 1.5px solid white !important;
+}/* End custom CSS */

@@ -305,12 +305,6 @@ class Admin {
         $links[] = $settings_anchor;
 
         //removeIf(pro)
-        $manage_license_link    = admin_url('admin.php?page=hurrytimer_license');
-        $manage_license_anchor = '<a href="' . $manage_license_link . '">' . __('License') . '</a>';
-        $links[] = $manage_license_anchor;
-        //endRemoveIf(pro)
-
-        //removeIf(pro)
         $links[]
             = '<a href="https://hurrytimer.com/?utm_source=plugin&utm_medium=installed_plugins&utm_campaign=go_pro" target="_blank" style="font-weight:bold;color:#F37335">Go Pro</a>';
 

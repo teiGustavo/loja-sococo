@@ -1,0 +1,127 @@
+{
+  "_id": "loja-sococo",
+  "startUrl": [
+    "https://loja.sococo.com.br"
+  ],
+  "selectors": [
+    {
+      "id": "category-link",
+      "linkType": "linkFromHref",
+      "multiple": true,
+      "parentSelectors": [
+        "_root"
+      ],
+      "selector": "#menu-loja-1 a",
+      "type": "SelectorLink"
+    },
+    {
+      "id": "product-link",
+      "linkType": "linkFromHref",
+      "multiple": true,
+      "parentSelectors": [
+        "category-link"
+      ],
+      "selector": "a.woocommerce-LoopProduct-link",
+      "type": "SelectorLink"
+    },
+    {
+      "id": "name",
+      "multiple": false,
+      "parentSelectors": [
+        "product-link"
+      ],
+      "regex": "",
+      "selector": "h1.product_title",
+      "type": "SelectorText"
+    },
+    {
+      "id": "short_description",
+      "multiple": false,
+      "parentSelectors": [
+        "product-link"
+      ],
+      "regex": "",
+      "selector": ".woocommerce-product-details__short-description > *",
+      "type": "SelectorText"
+    },
+    {
+      "id": "regular_price",
+      "multiple": false,
+      "parentSelectors": [
+        "product-link"
+      ],
+      "regex": "",
+      "selector": "p.price del span.woocommerce-Price-amount, p.price > span.woocommerce-Price-amount:not(:has(ins), :has(del))",
+      "type": "SelectorText"
+    },
+    {
+      "id": "sale_price",
+      "multiple": false,
+      "parentSelectors": [
+        "product-link"
+      ],
+      "regex": "",
+      "selector": "p.price ins span.woocommerce-Price-amount",
+      "type": "SelectorText"
+    },
+    {
+      "id": "sku",
+      "multiple": false,
+      "parentSelectors": [
+        "product-link"
+      ],
+      "regex": "",
+      "selector": "span.sku",
+      "type": "SelectorText"
+    },
+    {
+      "id": "categories",
+      "multiple": false,
+      "parentSelectors": [
+        "product-link"
+      ],
+      "regex": "",
+      "selector": "span.posted_in",
+      "type": "SelectorText"
+    },
+    {
+      "id": "description",
+      "multiple": false,
+      "parentSelectors": [
+        "product-link"
+      ],
+      "regex": "",
+      "selector": ".woocommerce-Tabs-panel--description p",
+      "type": "SelectorText"
+    },
+    {
+      "id": "weight",
+      "multiple": false,
+      "parentSelectors": [
+        "product-link"
+      ],
+      "regex": "",
+      "selector": ".woocommerce-product-attributes-item.woocommerce-product-attributes-item--weight td",
+      "type": "SelectorText"
+    },
+    {
+      "id": "dimensions",
+      "multiple": false,
+      "parentSelectors": [
+        "product-link"
+      ],
+      "regex": "",
+      "selector": ".woocommerce-product-attributes-item.woocommerce-product-attributes-item--dimensions td",
+      "type": "SelectorText"
+    },
+    {
+      "id": "image",
+      "multiple": false,
+      "parentSelectors": [
+        "product-link"
+      ],
+      "selector": "img.zoomImg",
+      "type": "SelectorImage"
+    }
+  ]
+}
