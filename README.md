@@ -1,5 +1,7 @@
 ### Loja Inspiração: [loja.sococo.com.br](https://loja.sococo.com.br)
 
+Direcionado a uso educacional e de estudo; não é um produto oficial nem contém conteúdo proprietário da Loja Sococo.
+
 ### Tarefas obrigatórias:
 - [x] Cabeçalho e Rodapé configurado para aparecer em todas as páginas da loja virtual
 - No rodapé deve ter:
@@ -52,5 +54,6 @@ enviando um cupom de 5% de desconto gerado e aplicado ao carrinho automaticament
 - Caso ocorra algum erro de permissão (o que não deveria), copie os comandos definidos no arquivo `Dockerfile` e execute-os diretamente no terminal do container do Wordpress (`docker exec -it [nome_do_container] bash`).
 - Foi enviado e mantido toda a pasta do wordpress para facilitar o desenvolvimento e evitar retrabalho na hora de compartilhar.
 - Os dados de produtos (como categorias, imagens, etc.) foram importados via plugin `Product Import Export for WooCommerce` (pois o importador CSV do Wordpress estava enfrentando dificuldades para resolver as imagens). Os dados foram obtidos por web-scrapping do site original (veja `./web-scrapping` para ter acesso às configurações utilizadas).
+
 
 Durante o desenvolvimento, algum dos plugins que testei acabou corrompendo o banco de dados do Wordpress (com alguns arquivos), o que me tomou alguns dias de correção (mesmo desenvolvendo com Docker e backups recorrentes), então, não tive como dar muita atenção para a responsividade, desculpe.
